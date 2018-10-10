@@ -1,9 +1,35 @@
+// FIXME: Make the button action panel flex into a column on mobile
+// FIXME: Make sure the expansion panels are center-aligned on desktop sizes
 .flex-lists{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    @media only screen and (max-device-width: 599px) {
+        flex-direction: column;
+    }
     ul {
         list-style: none;
         padding-left: 0;
     }
+}
+
+mat-toolbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+mat-expansion-panel {
+    max-width: 960px;
+    margin: 0 50px;
+    @media only screen and (max-device-width: 599px) {
+        margin: 0 10px;
+    } 
+}
+
+h1 {
+    margin-left: 50px;
+    @media only screen and (max-device-width: 599px) {
+        margin-left: 10px;
+    } 
 }
