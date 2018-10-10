@@ -1,3 +1,51 @@
-<p>
-  main-screen works!
-</p>
+<mat-toolbar>
+  <!-- FIXME: Can we get a logo that's just the LOOP text? -->
+  <img width="36px" height="36px" alt="Loop Logo" src="assets/img/loop2.png">
+</mat-toolbar>
+
+<h1>Job Position</h1>
+
+<mat-accordion>
+  <mat-expansion-panel>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        James Franklin
+      </mat-panel-title>
+      <mat-panel-description>
+        Stage 1/5
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="flex-lists">
+      <div class="contact">
+        <p>
+          Contact Info
+        </p>
+        <ul>
+          <li>Placeholder</li>
+          <li>Placeholder</li>
+          <li>Placeholder</li>
+        </ul>
+      </div>
+      <div class="docs">
+        <p>
+          Documents
+        </p>
+        <ul>
+            <li>Placeholder</li>
+            <li>Placeholder</li>
+            <li>Placeholder</li>
+          </ul>
+      </div>
+    </div>
+
+
+    <mat-action-row>
+      <button mat-button>Accept</button>
+      <button mat-button>Email</button>
+      <button mat-button>Reject</button>
+    </mat-action-row>
+
+  </mat-expansion-panel>
+</mat-accordion>
