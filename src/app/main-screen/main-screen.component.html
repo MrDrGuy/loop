@@ -2,7 +2,10 @@
   <!-- FIXME: Can we get a logo that's just the LOOP text? -->
   <img width="36px" height="36px" alt="Loop Logo" src="assets/img/loop2.png">
   <div>
-    <button mat-button class="nav-button"><i class="material-icons">person</i></button>
+    <button mat-button class="nav-button" [matMenuTriggerFor]="menu"><i class="material-icons">person</i></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Logout</button>
+    </mat-menu>
     <button mat-button class="nav-button"><i class="material-icons">menu</i></button>
   </div>
 </mat-toolbar>
