@@ -1,0 +1,30 @@
+.flex-lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; }
+  @media only screen and (max-device-width: 599px) {
+    .flex-lists {
+      flex-direction: column; } }
+  .flex-lists ul {
+    list-style: none;
+    padding-left: 0; }
+
+mat-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+mat-expansion-panel {
+  max-width: 960px;
+  margin: 0 50px; }
+  @media only screen and (max-device-width: 599px) {
+    mat-expansion-panel {
+      margin: 0 10px; } }
+
+h1 {
+  margin-left: 50px; }
+  @media only screen and (max-device-width: 599px) {
+    h1 {
+      margin-left: 10px; } }
+
+/*# sourceMappingURL=main-screen.component.css.map */
