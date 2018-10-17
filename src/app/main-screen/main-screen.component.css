@@ -8,6 +8,13 @@
   .flex-lists ul {
     list-style: none;
     padding-left: 0; }
+    .flex-lists ul li {
+      display: flex;
+      padding-bottom: 5px; }
+      .flex-lists ul li i {
+        padding-right: 5px; }
+      .flex-lists ul li span, .flex-lists ul li a {
+        align-self: flex-end; }
 
 mat-toolbar {
   display: flex;
@@ -20,11 +27,30 @@ mat-expansion-panel {
   @media only screen and (max-device-width: 599px) {
     mat-expansion-panel {
       margin: 0 10px; } }
+  @media only screen and (min-device-width: 1060px) {
+    mat-expansion-panel {
+      margin: auto; } }
 
 h1 {
-  margin-left: 50px; }
+  margin-left: 55px; }
   @media only screen and (max-device-width: 599px) {
     h1 {
-      margin-left: 10px; } }
+      margin-left: 15px; } }
+
+@media only screen and (max-device-width: 599px) {
+  mat-action-row {
+    flex-direction: column;
+    padding: 0; }
+    mat-action-row button {
+      width: 100%;
+      margin-left: 0;
+      padding: 5px; } }
+
+.contact {
+  flex-grow: 1;
+  padding-right: 16px; }
+
+.docs {
+  flex-grow: 2; }
 
 /*# sourceMappingURL=main-screen.component.css.map */
