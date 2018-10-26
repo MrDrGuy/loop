@@ -1,0 +1,20 @@
+body {
+  display: flex; }
+
+.flex-div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: auto;
+  padding-top: 150px; }
+  .flex-div mat-card, .flex-div img {
+    margin: auto; }
+
+mat-card {
+  width: 50%; }
+
+img {
+  max-width: 30%;
+  max-height: 30%; }
+
+/*# sourceMappingURL=login-page.component.css.map */

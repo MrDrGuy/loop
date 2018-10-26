@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    // background: rgba(48,48,48, 0.5);
+}
+
+.flex-div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: auto;
+    padding-top: 150px;
+    mat-card, img {
+        margin: auto;
+    }
+}
+
+mat-card {
+    width: 50%;
+}
+
+img {
+    max-width: 30%;
+    max-height: 30%;
+}
