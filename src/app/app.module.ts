@@ -40,15 +40,12 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
-<<<<<<< HEAD
     MatDialogModule,
     MatCardModule,
     MatFormFieldModule
-=======
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule
->>>>>>> master
   ],
   providers: [],
   bootstrap: [AppComponent]
