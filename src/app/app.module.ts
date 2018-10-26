@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,6 +26,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     MatToolbarModule,
     MatExpansionModule,
     BrowserAnimationsModule,
