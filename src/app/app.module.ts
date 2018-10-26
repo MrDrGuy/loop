@@ -16,6 +16,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
 
 @NgModule({
   declarations: [
@@ -34,9 +40,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
+<<<<<<< HEAD
     MatDialogModule,
     MatCardModule,
     MatFormFieldModule
+=======
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule
+>>>>>>> master
   ],
   providers: [],
   bootstrap: [AppComponent]
