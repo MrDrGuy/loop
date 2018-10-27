@@ -36,74 +36,74 @@ export class Files {
   }
 
 //canidate gets/sets
-  get getCandidate(){
+  getCandidate(){
     return this.candidateID;
   }
-  set setcandidate(id: string){
+  setcandidate(id: string){
     this.candidateID = id;
   }
 
 //recruiters gets/sets
-  get getRecruiter(){
+  getRecruiter(){
     return this.recruiterID;
   }
-  set setRecruiter(id: string){
+  setRecruiter(id: string){
     this.recruiterID = id;
   }
 
 //coverLetter gets/sets
-  get getCoverLetterRef(){
+  getCoverLetterRef(){
     return this.coverLetterRef;
   }
-  get getCoverLetterDL(){
+  getCoverLetterDL(){
     return this.coverLetterDL;
   }
-  set setCoverLetterRef(url: string){
+  setCoverLetterRef(url: string){
     this.coverLetterRef = url;
   }
-  set setCoverLetterDL(url: string){
+  setCoverLetterDL(url: string){
     this.coverLetterDL = url;
   }
 
 //resume gets/sets
-  get getResumeRef(){
+  getResumeRef(){
     return this.resumeRef;
   }
-  get getResumeDL(){
+  getResumeDL(){
     return this.resumeDL;
   }
-  set setResumeRef(url: string){
+  setResumeRef(url: string){
     this.resumeRef = url;
   }
-  set setResumeDL(url: string){
+  setResumeDL(url: string){
     this.resumeDL = url;
   }
 
 //interviewQs gets/sets
-  get getInterviewQsRef(){
+  getInterviewQsRef(){
     return this.interviewQsRef;
   }
-  get getInterviewQsDL(){
+  getInterviewQsDL(){
     return this.interviewQsDL;
   }
-  set setInterviewQsRef(url: string){
+  setInterviewQsRef(url: string){
     this.interviewQsRef = url;
   }
-  set setInterviewQsDL(url: string){
+  setInterviewQsDL(url: string){
     this.interviewQsDL = url;
   }
 
 //references gets/sets
-  get getReferencesRef(){
+  getReferencesRef(){
     return this.referencesRef;
   }
-  get getReferencesDL(){
+  getReferencesDL(){
     return this.referencesDL;
   }
-  set setReferencesRef(url: string){
+  setReferencesRef(url: string){
     this.referencesRef = url;
   }
-  set setReferencesDL(url: string){
+  setReferencesDL(url: string){
     this.referencesDL = url;
   }
 

@@ -1,3 +1,22 @@
-<p>
-  login-page works!
-</p>
+
+<!--
+<div *ngIf="auth.user | async; then authenticated else guest"
+  <!-- this will be replaced I think
+</div>
+
+
+<ng-template #guest>
+  <h3>You are not logged in</h3>
+  <button mat-button ngClick="testerButton()">LogIn!</button>
+</ng-template>
+
+<ng-template #authenticated>
+
+</ng-template>
+-->
+
+<div>Welcome, this works! {{good}}</div>
+<button mat-button (click)="testerButton()">Create Account</button>
+<button mat-button (click)="testerButton2()">Log In</button>
+<div>{{good}}</div>
+<div>{{sood}}</div>
