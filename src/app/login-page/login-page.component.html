@@ -1,3 +1,48 @@
+<body>
+  <div class="flex-div">
+    <img src="assets/img/loop2.png">
+
+    <mat-card>
+      <mat-tab-group mat-stretch-tabs>
+
+        <mat-tab label="Login">
+          <div class="form-div">
+            <mat-form-field>
+              <input matInput placeholder="Username">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Password">
+            </mat-form-field>
+          </div>
+          <mat-card-actions>
+            <button mat-button>Login</button>
+          </mat-card-actions>
+        </mat-tab>
+
+        <mat-tab label="Create Account">
+            <div class="form-div">
+              <mat-form-field>
+                <input matInput placeholder="Username">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Email">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Password">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Reenter Password">
+              </mat-form-field>
+            </div>
+          <mat-card-actions>
+            <button mat-button>Create Account</button>
+          </mat-card-actions>
+        </mat-tab>
+
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</body>
 
 <!--
 <div *ngIf="auth.user | async; then authenticated else guest"
