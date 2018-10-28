@@ -18,6 +18,11 @@ mat-card {
     width: 50%;
 }
 
+.form-div {
+    display: flex;
+    flex-direction: column;
+}
+
 img {
     max-width: 30%;
     max-height: 30%;

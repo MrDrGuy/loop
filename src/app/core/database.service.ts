@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { AngularFirestore, AngularFirestoreCollection }
+import { AngularFirestoreModule, AngularFirestoreCollection,
+   AngularFirestore, AngularFirestoreDocument }
 from '@angular/fire/firestore';
 
 
@@ -10,8 +11,8 @@ from '@angular/fire/firestore';
 export class DatabaseService {
 
   //document Nav
-  documentsCollection: AngularFirestoreCollection<any> = this.afs.collection('documents');
-  documentsObs = this.documentsCollection.valueChanges();
+  filesCollection: AngularFirestoreCollection<any> = this.afs.collection('files');
+  filesObs = this.filesCollection.valueChanges();
 
 
   constructor(private afs: AngularFirestore) { }
@@ -21,8 +22,8 @@ export class DatabaseService {
 
   }
 
-  updateDocument(docID){
-    this.documentsCollection.doc(docID).set({
+  updateDocument(fileID){
+    this.filesCollection.doc(fileID).set({
       canidateID: '',
       recruiterID: '',
       coverLetterRef: '',

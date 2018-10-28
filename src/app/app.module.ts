@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router';
+//other component data
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
@@ -15,12 +16,22 @@ import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
 
+//angularfire and firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+
+const appRoutes: Routes = [
+  {path: 'login-page-component', component: LoginPageComponent},
+  {path: 'main-screen-component', component: MainScreenComponent},
+  {path: '', redirectTo: '/login-page-component', pathMatch : 'full'}
+]
 
 
 @NgModule({
@@ -34,6 +45,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     AcceptDialogComponent
   ],
   imports: [
+    RouterModule.forRoot(appRoutes),
     BrowserModule,
     MatToolbarModule,
     MatExpansionModule,
@@ -42,10 +54,16 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     MatMenuModule,
     MatDialogModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatTabsModule,
+    MatInputModule
+    /*
+    AngularFirestoreCollection,
+    AngularFirestoreDocument
+    */
   ],
   providers: [],
   bootstrap: [AppComponent]
