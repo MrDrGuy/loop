@@ -52,7 +52,7 @@
               <li><i class="material-icons">mode_comment</i><span>Interview Notes</span></li>
               <li><i class="material-icons">group</i><span>References</span></li>
               <li><i class="material-icons">public</i><span>Website</span></li>
-              <li><a href="#" class="mat-raised-button">+ Upload New</a></li>
+              <li><button mat-raised-button (click)="openUploadDialog()">+ Upload New</button></li>
 
             </ul>
         </div>
@@ -60,9 +60,9 @@
   
   
       <mat-action-row>
-        <button mat-button (click)="AcceptDialogComponent.openAcceptDialog()">Advance</button>
+        <button mat-button (click)="openAcceptDialog()">Advance</button>
         <button mat-button>Email</button>
-        <button mat-button>Reject</button>
+        <button mat-button (click)="openRejectDialog()">Reject</button>
       </mat-action-row>
   
     </mat-expansion-panel>
