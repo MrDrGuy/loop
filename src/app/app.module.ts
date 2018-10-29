@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 //angularfire and firebase
 import { AngularFireModule } from '@angular/fire';
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     MatTabsModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
     /*
     AngularFirestoreCollection,
     AngularFirestoreDocument
