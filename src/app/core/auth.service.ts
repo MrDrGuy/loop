@@ -58,6 +58,16 @@ export class AuthService {
     });
   }
 
+  firstLoginWithEmail(email:string, password:string){
+    this.afAuth.auth.signInWithEmailAndPassword(email,password)
+    .then(credential => {
+      console.log('welcome user!');
+      return this.setUserDoc(credential.user)
+    }).catch(error =>{
+      this.handleError(error);
+    })
+  }
+
   loginWithEmail(email:string, password:string){
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
     .then(credential => {
