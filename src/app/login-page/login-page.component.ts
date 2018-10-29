@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs';
 import { NavService } from '../core/nav.service';
+import { appErrors } from '../core/Errors';
+import { DatabaseService } from '../core/database.service';
 
 
 @Component({
@@ -12,26 +14,49 @@ import { NavService } from '../core/nav.service';
 
 export class LoginPageComponent implements OnInit {
 
+//html variables
+/*
+*login
+*email, password
+*createAccount
+*username, cEmail, cPassword, cPassword2
+*/
+
+//testing variables
+/*
   good = '445';
   sood = '';
+  testemail = "15JoeQ747@gmail.com";
+  testpassword = "password";
+  */
 
-  email = "15JoeQ747@gmail.com";
-  password = "password";
+  usernameError : string = "";
 
-  constructor(public auth: AuthService, private nav: NavService) {
+  constructor(
+    public auth: AuthService,
+    private afs : DatabaseService
+  ) {
   }
 
   ngOnInit() {
   }
 
+  login(email:string,password:string){
+    this.auth.loginWithEmail(email,password);
+  }
+
+  createAccount(email:string,password:string){
+
+  }
+/*
   testerButton(){
-    this.auth.createAccount(this.email,this.password);
+    this.auth.createAccount(this.testemail,this.testpassword, 'username');
     this.good = "Created Account";
   }
 
   testerButton2(){
-    //this.auth.createAccount(this.email,this.password)
-    this.nav.gotoMainScreen();
+    this.auth.loginWithEmail(this.testemail,this.testpassword)
+    //this.nav.gotoMainScreen();
   }
-
+*/
 }

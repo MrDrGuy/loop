@@ -12,6 +12,7 @@ import { AngularFirestoreModule, AngularFirestore,
 import { Observable, of } from 'rxjs';
 import { map, switchMap, first } from 'rxjs/operators';
 import { Recruiter } from './classTemplates/users';
+import { NavService } from '../core/nav.service';
 
 interface User {
   uid: string;
@@ -29,11 +30,12 @@ export class AuthService {
 
   user : Observable<User>
   userKey : any
+  loginError : string
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private nav: NavService
   ) {
     //get auth data and firestore Document
     this.user = this.afAuth.authState.pipe(
@@ -49,32 +51,40 @@ export class AuthService {
 
 
   //logs a user into the application.
-  createAccount(email:string, password:string){
+  createAccount(email:string, password:string, username:string){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
-    .then(credential =>{
-      return this.setUserDoc(credential);
-    }).catch(error =>{
-      this.handleError(error);
+    .then(() =>{
+      this.firstLoginWithEmail(email,password);
+    }    ).catch(error =>{
+      console.log(error);
     });
   }
 
   firstLoginWithEmail(email:string, password:string){
+    var myError = "";
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
     .then(credential => {
       console.log('welcome user!');
+      this.nav.gotoMainScreen();
       return this.setUserDoc(credential.user)
     }).catch(error =>{
-      this.handleError(error);
+      myError = error;
     })
+    return myError;
   }
 
   loginWithEmail(email:string, password:string){
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
     .then(credential => {
-      console.log('welcome user!');
-      return this.setUserDoc(credential.user)
+      console.log('Welcome to LOOP!');
+      this.nav.gotoMainScreen();
     }).catch(error =>{
-      this.handleError(error);
+      const code = error.code;
+      //can't seem to convert to string... needs to be fixed.
+      const message = error.message;
+      if(code == 'auth/wrong-password'){
+        console.log(message);
+      }
     })
   }
 
@@ -83,11 +93,6 @@ export class AuthService {
     return this.afs.doc(`users/${user.uid}`).update(data)
   }
 
-
-  private handleError(error){
-    console.error(error);
-    console.log(error);
-  }
 
   //on login, this sets up the user's user doc
   private setUserDoc(user){

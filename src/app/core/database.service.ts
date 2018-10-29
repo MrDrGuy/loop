@@ -14,6 +14,9 @@ export class DatabaseService {
   filesCollection: AngularFirestoreCollection<any> = this.afs.collection('files');
   filesObs = this.filesCollection.valueChanges();
 
+  usernamesCollection: AngularFirestoreCollection<any> = this.afs.collection('usernames');
+  usernamesObs = this.usernamesCollection.valueChanges();
+
 
   constructor(private afs: AngularFirestore) { }
 
@@ -62,6 +65,21 @@ export class DatabaseService {
   }
   removeCanidate(){
 
+  }
+
+//queries
+//https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md
+//https://github.com/angular/angularfire2/issues/1272
+
+  checkUsernameAvailability(newUsername:string){
+    this.usernamesCollection.doc(`/${newUsername}`).get().pipe(
+      then(docSnapshot => {
+        if (docSnapshot.exists) {
+          return true;
+        }
+      }).catch((errors) =>{
+        return false;
+      });)
   }
 
 

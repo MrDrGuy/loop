@@ -8,34 +8,34 @@
         <mat-tab label="Login">
           <div class="form-div">
             <mat-form-field>
-              <input matInput placeholder="Username">
+              <input matInput type='text' placeholder="Email" #email>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Password">
+              <input matInput type='text' placeholder="Password" #password>
             </mat-form-field>
           </div>
           <mat-card-actions>
-            <button mat-button>Login</button>
+            <button mat-button (click)="login(email.value,password.value)">Login</button>
           </mat-card-actions>
         </mat-tab>
 
         <mat-tab label="Create Account">
             <div class="form-div">
               <mat-form-field>
-                <input matInput placeholder="Username">
+                <input matInput placeholder="Username" #username>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Email">
+                <input matInput placeholder="Email" #cEmail>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Password">
+                <input matInput placeholder="Password" #cPassword>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Reenter Password">
+                <input matInput placeholder="Reenter Password" #cPassword2>
               </mat-form-field>
             </div>
           <mat-card-actions>
-            <button mat-button>Create Account</button>
+            <button mat-button (click)="createAccount()" >Create Account</button>
           </mat-card-actions>
         </mat-tab>
 
@@ -44,24 +44,12 @@
   </div>
 </body>
 
+<div>{{usernameError}}</div>
+
 <!--
-<div *ngIf="auth.user | async; then authenticated else guest"
-  <!-- this will be replaced I think
-</div>
-
-
-<ng-template #guest>
-  <h3>You are not logged in</h3>
-  <button mat-button ngClick="testerButton()">LogIn!</button>
-</ng-template>
-
-<ng-template #authenticated>
-
-</ng-template>
--->
-
 <div>Welcome, this works! {{good}}</div>
 <button mat-button (click)="testerButton()">Create Account</button>
 <button mat-button (click)="testerButton2()">Log In</button>
 <div>{{good}}</div>
 <div>{{sood}}</div>
+-->
