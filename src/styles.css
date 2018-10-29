@@ -5,4 +5,7 @@ body {
 a {
   color: #FF8F91; }
 
+body, .mat-app-background {
+  margin: 0; }
+
 /*# sourceMappingURL=styles.css.map */
