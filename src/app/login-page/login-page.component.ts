@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs';
+import { NavService } from '../core/nav.service';
 
 
 @Component({
@@ -17,8 +18,7 @@ export class LoginPageComponent implements OnInit {
   email = "15JoeQ747@gmail.com";
   password = "password";
 
-  constructor(public auth: AuthService) {
-    //this.good = "welcome";
+  constructor(public auth: AuthService, private nav: NavService) {
   }
 
   ngOnInit() {
@@ -31,8 +31,7 @@ export class LoginPageComponent implements OnInit {
 
   testerButton2(){
     //this.auth.createAccount(this.email,this.password)
-    this.auth.loginWithEmail(this.email, this.password);
-    this.good = "Logged in";
+    this.nav.gotoMainScreen();
   }
 
 }
