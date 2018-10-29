@@ -23,12 +23,13 @@ export class LoginPageComponent implements OnInit {
 */
 
 //testing variables
-/*
+
   good = '445';
   sood = '';
-  testemail = "15JoeQ747@gmail.com";
+  testemail = "17JoeQ747@gmail.com";
   testpassword = "password";
-  */
+  testusername = "MrDrGuy";
+
 
   usernameError : string = "";
 
@@ -48,15 +49,16 @@ export class LoginPageComponent implements OnInit {
   createAccount(email:string,password:string){
 
   }
-/*
+
   testerButton(){
     this.auth.createAccount(this.testemail,this.testpassword, 'username');
     this.good = "Created Account";
   }
-
+/*
   testerButton2(){
-    this.auth.loginWithEmail(this.testemail,this.testpassword)
+    this.afs.checkUsernameAvailability(this.testusername);
     //this.nav.gotoMainScreen();
   }
-*/
+  */
+
 }

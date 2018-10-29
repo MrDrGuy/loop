@@ -70,17 +70,19 @@ export class DatabaseService {
 //queries
 //https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md
 //https://github.com/angular/angularfire2/issues/1272
-
+/*
   checkUsernameAvailability(newUsername:string){
     this.usernamesCollection.doc(`/${newUsername}`).get().pipe(
       then(docSnapshot => {
         if (docSnapshot.exists) {
+          console.log('it exists');
           return true;
         }
       }).catch((errors) =>{
+        console.log('it doesnt exists');
         return false;
-      });)
+      }));
   }
-
+*/
 
 }
