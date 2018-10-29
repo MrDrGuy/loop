@@ -42,7 +42,6 @@ const appRoutes: Routes = [
     AcceptDialogComponent,
     RejectDialogComponent,
     UploadDialogComponent,
-    AcceptDialogComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -64,6 +63,11 @@ const appRoutes: Routes = [
     AngularFirestoreCollection,
     AngularFirestoreDocument
     */
+  ],
+  entryComponents: [
+    AcceptDialogComponent,
+    RejectDialogComponent,
+    UploadDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

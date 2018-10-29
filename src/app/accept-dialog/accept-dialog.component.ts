@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-accept-dialog',
@@ -8,16 +8,9 @@ import { MatDialog, MatDialogConfig } from "@angular/material";
 })
 
 export class AcceptDialogComponent {
-
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialogRef: MatDialogRef<AcceptDialogComponent>) { }
   
-  openAcceptDialog() {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    this.dialog.open(AcceptDialogComponent, dialogConfig);
+  cancelAccept(){
+    this.dialogRef.close();
   }
-
 }
