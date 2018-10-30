@@ -30,7 +30,8 @@ img {
   max-width: 944px;
   max-height: 385px;
   margin: auto;
-  padding-top: 35px; }
+  padding-top: 35px;
+  width: 100%; }
 
 .img-padding {
   margin: 0 auto;
