@@ -26,6 +26,8 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NewPositionDialogComponent } from './new-position-dialog/new-position-dialog.component';
+import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidate-dialog.component';
 
 
 
@@ -37,6 +39,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AcceptDialogComponent,
     RejectDialogComponent,
     UploadDialogComponent,
+    NewPositionDialogComponent,
+    NewCandidateDialogComponent,
   ],
   imports: [
     BrowserModule,
