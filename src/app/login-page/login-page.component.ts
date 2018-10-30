@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { NavService } from '../core/nav.service';
 import { appErrors } from '../core/Errors';
 import { DatabaseService } from '../core/database.service';
+import { UsernameService} from '../core/username.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private afs : DatabaseService
+    private afs : DatabaseService,
+    private us : UsernameService
   ) {
   }
 
@@ -54,11 +56,12 @@ export class LoginPageComponent implements OnInit {
     this.auth.createAccount(this.testemail,this.testpassword, 'username');
     this.good = "Created Account";
   }
-/*
+
   testerButton2(){
-    this.afs.checkUsernameAvailability(this.testusername);
+    this.us.getUsernames(this.testusername)
+    //this.afs.checkUsernameAvailability(this.testusername);
     //this.nav.gotoMainScreen();
   }
-  */
+
 
 }

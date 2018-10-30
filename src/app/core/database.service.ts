@@ -3,6 +3,11 @@ import * as firebase from 'firebase/app';
 import { AngularFirestoreModule, AngularFirestoreCollection,
    AngularFirestore, AngularFirestoreDocument }
 from '@angular/fire/firestore';
+import {Username} from './interfaces';
+import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+
 
 
 @Injectable({
@@ -14,8 +19,10 @@ export class DatabaseService {
   filesCollection: AngularFirestoreCollection<any> = this.afs.collection('files');
   filesObs = this.filesCollection.valueChanges();
 
-  usernamesCollection: AngularFirestoreCollection<any> = this.afs.collection('usernames');
-  usernamesObs = this.usernamesCollection.valueChanges();
+  usernamesCollection: AngularFirestoreCollection<Username> = this.afs.collection('usernames');
+  usernames = this.usernamesCollection.valueChanges();
+  username: Observable<Username[]>;
+
 
 
   constructor(private afs: AngularFirestore) { }
@@ -70,19 +77,15 @@ export class DatabaseService {
 //queries
 //https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md
 //https://github.com/angular/angularfire2/issues/1272
-/*
+//https://github.com/angular/angularfire2/blob/master/docs/firestore/collections.md
+
   checkUsernameAvailability(newUsername:string){
-    this.usernamesCollection.doc(`/${newUsername}`).get().pipe(
-      then(docSnapshot => {
-        if (docSnapshot.exists) {
-          console.log('it exists');
-          return true;
-        }
-      }).catch((errors) =>{
-        console.log('it doesnt exists');
-        return false;
-      }));
+    //this.usernamesCollection.doc(`/${newUsername}`)
+
+
   }
-*/
+
+
+
 
 }
