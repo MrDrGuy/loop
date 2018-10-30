@@ -68,7 +68,9 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
   entryComponents: [
     AcceptDialogComponent,
     RejectDialogComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    NewPositionDialogComponent,
+    NewCandidateDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

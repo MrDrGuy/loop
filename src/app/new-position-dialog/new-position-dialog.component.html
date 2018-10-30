@@ -1,3 +1,12 @@
-<p>
-  new-position-dialog works!
-</p>
+<h1 mat-dialog-title>Create New Position</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Position Title">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelNewPosition()">Cancel</button>
+  <button mat-button (click)="cancelNewPosition()">Save</button>
+</div>

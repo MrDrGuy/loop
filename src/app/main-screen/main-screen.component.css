@@ -46,11 +46,20 @@ h1 {
       margin-left: 0;
       padding: 5px; } }
 
+.test {
+  display: flex;
+  flex-direction: column; }
+
 .contact {
   flex-grow: 1;
   padding-right: 16px; }
 
 .docs {
   flex-grow: 2; }
+
+.new-candidate {
+  margin: 25px auto;
+  max-width: 960px;
+  padding: 0 30px; }
 
 /*# sourceMappingURL=main-screen.component.css.map */
