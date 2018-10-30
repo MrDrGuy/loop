@@ -1,23 +1,19 @@
-body {
-    display: flex;
-    // background: rgba(48,48,48, 0.5);
-}
-
 .flex-div {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: auto;
-    padding-top: 150px;
-    padding: 0 50px;
-    mat-card, img {
-        margin: auto;
-    }
+    flex-direction: column;
+    margin: 0 50px;
+    top: 30%;
 }
 
-// mat-card {
-//     width: 50%;
-// }
+mat-card {
+    max-width: 960px !important;
+}
+
+.card-padding {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+}
 
 mat-card-actions{
     display: flex;
@@ -36,6 +32,23 @@ mat-card-actions{
 }
 
 img {
-    max-width: 30%;
-    max-height: 30%;
+    max-width: 944px;
+    max-height: 385px;
+    margin: auto;
+    padding-top: 35px;
+}
+
+.img-padding {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 599px){
+    .flex-div {
+        margin: 0 10px;
+    }
+    img {
+        width: 100%;
+    }
 }
