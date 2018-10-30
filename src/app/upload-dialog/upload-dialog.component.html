@@ -1,7 +1,14 @@
+<h1 mat-dialog-title>Upload</h1>
 <div mat-dialog-content>
-  <p>Placeholder</p>
+  <mat-form-field>
+    <mat-select placeholder="Document Type">
+      <mat-option *ngFor="let type of types" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="cancelUpload()">k thx</button>
-  <button mat-button (click)="cancelUpload()">bye</button>
+  <button mat-button (click)="cancelUpload()">Cancel</button>
+  <button mat-button (click)="cancelUpload()">Save Upload</button>
 </div>
