@@ -7,8 +7,11 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <angular-file-uploader
+      [config]="afuConfig">
+</angular-file-uploader>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions class="mat-dialog-actions">
   <button mat-button (click)="cancelUpload()">Cancel</button>
   <button mat-button (click)="cancelUpload()">Save Upload</button>
 </div>

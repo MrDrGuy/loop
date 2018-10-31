@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule} from './app-routing/app-routing.module';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 //angularfire and firebase
 import { AngularFireModule } from '@angular/fire';
@@ -59,7 +60,8 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
     AngularFireAuthModule,
     MatTabsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    AngularFileUploaderModule
     /*
     AngularFirestoreCollection,
     AngularFirestoreDocument
