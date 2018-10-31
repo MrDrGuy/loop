@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule} from './app-routing/app-routing.module';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 //angularfire and firebase
 import { AngularFireModule } from '@angular/fire';
@@ -26,6 +27,8 @@ import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NewPositionDialogComponent } from './new-position-dialog/new-position-dialog.component';
+import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidate-dialog.component';
 
 
 
@@ -37,6 +40,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AcceptDialogComponent,
     RejectDialogComponent,
     UploadDialogComponent,
+    NewPositionDialogComponent,
+    NewCandidateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireAuthModule,
     MatTabsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    AngularFileUploaderModule
     /*
     AngularFirestoreCollection,
     AngularFirestoreDocument
@@ -64,7 +70,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
   entryComponents: [
     AcceptDialogComponent,
     RejectDialogComponent,
-    UploadDialogComponent
+    UploadDialogComponent,
+    NewPositionDialogComponent,
+    NewCandidateDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

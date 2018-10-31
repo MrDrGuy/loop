@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,SAAU;EACN,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,IAAI",
+"sources": ["new-candidate-dialog.component.scss"],
+"names": [],
+"file": "new-candidate-dialog.component.css"
+}

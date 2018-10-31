@@ -7,6 +7,7 @@
     </mat-menu>
     <button mat-button class="nav-button" [matMenuTriggerFor]="menu"><i class="material-icons">menu</i></button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openNewPositionDialog()">Create New...</button>
       <button mat-menu-item>Position 1</button>
       <button mat-menu-item>Position 2</button>
       <button mat-menu-item>Position 3</button>
@@ -52,7 +53,7 @@
               <li><i class="material-icons">mode_comment</i><span>Interview Notes</span></li>
               <li><i class="material-icons">group</i><span>References</span></li>
               <li><i class="material-icons">public</i><span>Website</span></li>
-              <li><button mat-raised-button (click)="openUploadDialog()">+ Upload New</button></li>
+              <li><button mat-stroked-button color="primary" (click)="openUploadDialog()">+ Upload New</button></li>
 
             </ul>
         </div>
@@ -67,4 +68,7 @@
   
     </mat-expansion-panel>
   </mat-accordion>
+
+  <button mat-stroked-button color="primary" class="new-candidate" (click)="openNewCandidateDialog()">Add New Candidate</button>
+
 </div>

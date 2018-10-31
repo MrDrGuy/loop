@@ -26,4 +26,10 @@ export class UploadDialogComponent {
     {value: 'web-4', viewValue: 'Website'}
   ];
 
+  afuConfig = {
+    uploadAPI: {
+      url:"https://example-file-upload-api"
+    }
+};
+
 }

@@ -8,4 +8,7 @@ a {
 body, .mat-app-background {
   margin: 0; }
 
+.container {
+  padding-left: 0; }
+
 /*# sourceMappingURL=styles.css.map */
