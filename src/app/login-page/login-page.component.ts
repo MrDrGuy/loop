@@ -1,3 +1,8 @@
+/*
+*Document Author: Joey Queppet
+*Last Updated: 11/1/2018
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { Observable } from 'rxjs';
@@ -24,15 +29,17 @@ export class LoginPageComponent implements OnInit {
 */
 
 //testing variables
-
+  /*
   good = '445';
   sood = '';
   testemail = "17JoeQ747@gmail.com";
   testpassword = "password";
   testusername = "MrDrGuy";
+  */
 
-
-  usernameError : string = "";
+  //class variables
+  errors = appErrors;
+  userError : string = "";//display error
 
   constructor(
     public auth: AuthService,
@@ -48,10 +55,36 @@ export class LoginPageComponent implements OnInit {
     this.auth.loginWithEmail(email,password);
   }
 
-  createAccount(email:string,password:string){
+/**
+ * This method is initiated by button press.
+ * It checks to make sure the passwords match, if so it calls the authentication functions.
+ * @param email 
+ * @param password
+ * @param username
+ * @param password1
+ * @param password2
+ */
+  createAccount(email:string,password:string,username:string,
+  password1:string,password2:string){
+    if(password1 == password2){
+      this.auth.createAccount(email,password,username);
+    }else{
+      console.log(this.errors.authError3);
+      this.userError = this.errors.authError3;
 
+    }
   }
 
+  /**
+   *Clears the error text displayed on screen. 
+   * */
+    clearError(){
+   this.userError = "";
+    }
+
+
+
+  /*
   testerButton(){
     this.auth.createAccount(this.testemail,this.testpassword, 'username');
     this.good = "Created Account";
@@ -62,6 +95,6 @@ export class LoginPageComponent implements OnInit {
     //this.afs.checkUsernameAvailability(this.testusername);
     //this.nav.gotoMainScreen();
   }
-
+  */
 
 }

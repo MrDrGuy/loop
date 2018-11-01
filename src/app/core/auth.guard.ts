@@ -1,3 +1,12 @@
+/*
+*Document Author: Joey Queppet
+*Last Updated: 11/1/2018
+*
+*Takes advantage of the authguard ability of Angular,
+ * yet to be used as the nav auth works fine so far.
+ * will delete if not needed.
+*/
+
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';

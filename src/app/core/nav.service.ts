@@ -1,3 +1,10 @@
+/*
+*Document Author: Joey Queppet
+*Last Updated: 11/1/2018
+*
+*This service controls routing throughout the application.
+ * I've implemented some auth logic into this, auth.guard can probabbly be deleted.
+*/
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {appErrors} from './Errors';
@@ -8,9 +15,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class NavService {
 
-  loggedIn : boolean
-  errors : appErrors
+  loggedIn : boolean;
+  errors = appErrors;
 
+  /**
+   *declares router for routing, declares afAuth for access to the current user data.
+   * 
+   * @param router refers to the routes set in the app-routing.module
+   * @param afAuth a Angularfire auth variable, used to see if the user is logged on.
+   */
   constructor(private router: Router, private afAuth :AngularFireAuth) {
     this.afAuth.authState.subscribe(user =>{
       if(user){
@@ -22,19 +35,23 @@ export class NavService {
 
   }
 
+  /**
+   * Simple goto method. Takes the user to the login page.
+   *
+   */
   public gotoLoginPage(){
-    if(this.loggedIn){
       this.router.navigate(['../login-page']);
-    }else{
-      console.log(this.errors.getAuthErrors1);
-    }
   }
 
+  /**
+   *Goto method with authentication verification
+   *If(user is logged in) goto page...
+   **/
   public gotoMainScreen(){
     if(this.loggedIn){
       this.router.navigate(['../main-screen']);
     }else{
-      console.log(this.errors.getAuthErrors1);
+      console.log(this.errors.authError2);
     }
   }
 
