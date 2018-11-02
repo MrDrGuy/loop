@@ -10,6 +10,7 @@ export class appErrors {
   static authError1:string = 'No one is logged in. Please login before using the application.';
   static authError2:string = 'This username is taken. Please choose another.';
   static authError3:string = 'Your passwords do not match.';
+  static authError4:string = 'Username is already taken.';
 
 
 

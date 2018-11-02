@@ -2,7 +2,7 @@
 *Document Author: Joey Queppet
 *Last Updated: 11/1/2018
 *
-*This service controls the authentication procedures of the application. 
+*This service controls the authentication procedures of the application.
 */
 
 import { Injectable } from '@angular/core';
@@ -20,10 +20,12 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap, first } from 'rxjs/operators';
 import { Recruiter } from './classTemplates/users';
 import { NavService } from '../core/nav.service';
+import { Username } from '../core/interfaces';
 
 interface User {
   uid: string;
   email: string;
+  username?: string;
   fname?: string;
   lname?: string;
   candidates? : Array<string>;
@@ -38,6 +40,8 @@ export class AuthService {
   user : Observable<User>
   userKey : any
   loginError : string
+  userame: string
+  usernamesCollection: AngularFirestoreCollection<Username> = this.afs.collection('usernames');
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -66,7 +70,7 @@ export class AuthService {
   createAccount(email:string, password:string, username:string){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
     .then(() =>{
-      this.firstLoginWithEmail(email,password);
+      this.firstLoginWithEmail(email,password, username);
     }    ).catch(error =>{
       console.log(error);
     });
@@ -79,12 +83,13 @@ export class AuthService {
    * @param email
    * @param password
    */
-  firstLoginWithEmail(email:string, password:string){
+  firstLoginWithEmail(email:string, password:string, username:string){
     this.afAuth.auth.signInWithEmailAndPassword(email,password)
     .then(credential => {
       console.log('welcome user!');
+      this.usernameSetup(email, username);
       this.nav.gotoMainScreen();
-      return this.setUserDoc(credential.user)
+      return this.setUserDoc(credential.user, username)
     }).catch(error =>{
       console.log(error);
     })
@@ -121,33 +126,42 @@ export class AuthService {
    * creates a user doc with the new user's information.
    * @param user
    */
-  private setUserDoc(user){
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+ private setUserDoc(user: User, username:string){
+     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
-    const data: User = {
-      uid: user.uid,
-      email: user.email
-    }
+     const data: User = {
+       uid: user.uid,
+       email: user.email,
+       username: username
+     }
 
     return userRef.set(data)
 
   }
 
-  //used to retrive the current user. Yet to be used. 
+  //used to retrive the current user. Yet to be used.
   isLoggedIn() {
    return this.afAuth.authState.pipe(first()).toPromise();
-}
-/*
-async getUID() {
-   const user = await this.isLoggedIn()
-   if (user) {
-     return user.uid;
-   } else {
-     console.log('user is not signed in');
-     return null;
-  }
-}
-*/
+ }
+
+  /*
+  *Upon the creation of  an account, this method is called
+  *to create a username document in firestore with the
+  * new user's username and email.
+  */
+   usernameSetup(theEmail:string, theUsername:string){
+     this.usernamesCollection.doc(theUsername).set({
+      email: theEmail,
+      username: theUsername
+    }).catch((err) => {
+      console.log(err);
+    });
+   }
+
+
+
+
+
 
 
 
