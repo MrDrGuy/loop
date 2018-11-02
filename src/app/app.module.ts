@@ -62,10 +62,6 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
     MatInputModule,
     MatSelectModule,
     AngularFileUploaderModule
-    /*
-    AngularFirestoreCollection,
-    AngularFirestoreDocument
-    */
   ],
   entryComponents: [
     AcceptDialogComponent,

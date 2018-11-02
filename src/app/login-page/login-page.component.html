@@ -5,15 +5,15 @@
 
   <div class="card-padding">
     <mat-card>
-      <mat-tab-group mat-stretch-tabs>
+      <mat-tab-group mat-stretch-tabs (selectedTabChange)="clearError()">
 
-        <mat-tab label="Login">
+        <mat-tab label="Login" (click)="clearError()">
           <div class="form-div">
             <mat-form-field>
               <input required matInput type='text' placeholder="Email" #email>
             </mat-form-field>
             <mat-form-field>
-              <input required matInput placeholder="Password" type="password">
+              <input required matInput placeholder="Password" type="password" #password>
             </mat-form-field>
           </div>
           <mat-card-actions>
@@ -21,23 +21,24 @@
           </mat-card-actions>
         </mat-tab>
 
-        <mat-tab label="Create Account">
+        <mat-tab label="Create Account" (click)="clearError()">
           <div class="form-div">
             <mat-form-field>
-              <input required matInput placeholder="Username" #username>
+              <input required matInput placeholder="Username" #cUsername>
             </mat-form-field>
             <mat-form-field>
-              <input required matInput placeholder="Email" type="email">
+              <input required matInput placeholder="Email" type="email" #cEmail>
             </mat-form-field>
             <mat-form-field>
-              <input required matInput placeholder="Password" type="password">
+              <input required matInput placeholder="Password" type="password" #cPassword>
             </mat-form-field>
             <mat-form-field>
-              <input required matInput placeholder="Reenter Password" type="password">
+              <input required matInput placeholder="Reenter Password" type="password" #cPassword2>
             </mat-form-field>
           </div>
           <mat-card-actions>
-            <button mat-button (click)="createAccount()">Create Account</button>
+            <button mat-button (click)="verifyUsername(cEmail.value,cUsername.value,
+            cPassword.value, cPassword2.value)">Create Account</button>
           </mat-card-actions>
         </mat-tab>
 
@@ -47,11 +48,11 @@
 
 </div>
 
-<div>{{usernameError}}</div>
+<div>{{userError}}</div>
 
 
-<div>Welcome, this works! {{good}}</div>
+<!--<div>Welcome, this works! {{good}}</div>
 <button mat-button (click)="testerButton()">Create Account</button>
 <button mat-button (click)="testerButton2()">Log In</button>
 <div>{{good}}</div>
-<div>{{sood}}</div>
+<div>{{sood}}</div>-->

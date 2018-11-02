@@ -1,3 +1,11 @@
+/*
+*Document Author: Joey Queppet
+*Last Updated: 11/1/2018
+*
+*This service controls setting data to the firestore database.
+ * Very rough in production look, may be scrapped later.
+*/
+
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFirestoreModule, AngularFirestoreCollection,
