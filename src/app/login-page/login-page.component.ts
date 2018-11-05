@@ -60,9 +60,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(email:string,password:string){
-    this.auth.loginWithEmail(email,password).catch(error =>{
-      console.log(error);
-    });
+    this.auth.loginWithEmail(email,password);
   }
 
 /**
