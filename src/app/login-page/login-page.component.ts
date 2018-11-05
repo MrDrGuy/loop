@@ -60,7 +60,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(email:string,password:string){
-    this.auth.loginWithEmail(email,password);
+    this.auth.loginWithEmail(email,password).catch(error =>{
+      console.log(error);
+    });
   }
 
 /**
@@ -108,6 +110,7 @@ export class LoginPageComponent implements OnInit {
       if(doc.exists){
         //console.log(doc.data());
         console.log(this.errors.authError4);
+        this.userError = this.errors.authError4;
       }else{
         this.createAccount(email,regexUsername,password1,password2);
       }

@@ -43,6 +43,10 @@ export class AuthService {
   userame: string
   usernamesCollection: AngularFirestoreCollection<Username> = this.afs.collection('usernames');
 
+  /*
+  *Constructor checks to see if a user is currently logged in.
+  *If so, it sets a local interface for the user data.
+  */
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -111,6 +115,8 @@ export class AuthService {
       const message = error.message;
       if(code == 'auth/wrong-password'){
         console.log(message);
+      }else{
+        console.log(error);
       }
     })
   }
