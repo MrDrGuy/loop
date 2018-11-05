@@ -21,6 +21,7 @@ import { map, switchMap, first } from 'rxjs/operators';
 import { Recruiter } from './classTemplates/users';
 import { NavService } from '../core/nav.service';
 import { Username } from '../core/interfaces';
+import { appErrors } from '../core/Errors';
 
 interface User {
   uid: string;
@@ -40,9 +41,14 @@ export class AuthService {
   user : Observable<User>
   userKey : any
   loginError : string
+  errors = appErrors;
   userame: string
   usernamesCollection: AngularFirestoreCollection<Username> = this.afs.collection('usernames');
 
+  /*
+  *Constructor checks to see if a user is currently logged in.
+  *If so, it sets a local interface for the user data.
+  */
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -107,11 +113,8 @@ export class AuthService {
       console.log('Welcome to LOOP!');
       this.nav.gotoMainScreen();
     }).catch(error =>{
-      const code = error.code;
-      const message = error.message;
-      if(code == 'auth/wrong-password'){
-        console.log(message);
-      }
+      console.log(this.errors.authError5);
+      console.log(error.message);
     })
   }
 
