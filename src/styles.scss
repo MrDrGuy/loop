@@ -23,3 +23,11 @@ body, .mat-app-background{
 .container {
     padding-left: 0;
 }
+
+.mat-stroked-button:not([class*=mat-elevation-z]){
+    box-shadow: 0 0 0 0 rgba(0,0,0,.2), 0 0 0 0 rgba(0,0,0,.14), 0 0 0 0 rgba(0,0,0,.12);
+}
+
+.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary{
+    color: #c2185b;
+}
