@@ -1,14 +1,18 @@
-@import url(../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css);
+@import url(pink-bluegrey.css);
 body {
-  font-family: 'Open Sans', sans-serif; }
+  font-family: "Open Sans", sans-serif;
+}
 
 a {
-  color: #FF8F91; }
+  color: #FF8F91;
+}
 
 body, .mat-app-background {
-  margin: 0; }
+  margin: 0;
+}
 
 .container {
-  padding-left: 0; }
+  padding-left: 0;
+}
 
 /*# sourceMappingURL=styles.css.map */
