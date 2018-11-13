@@ -10,3 +10,13 @@ export interface Username {
   username: string;
   recruiterEmail: string;
 }
+
+export interface User {
+  uid: string;
+  email: string;
+  username?: string;
+  fName?: string;
+  lName?: string;
+  candidates? : Array<string>;
+  positions? : Array<string>;
+}

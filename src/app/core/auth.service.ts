@@ -25,10 +25,10 @@ import { appErrors } from '../core/Errors';
 
 interface User {
   uid: string;
-  email: string;
+  email?: string;
   username?: string;
-  fname?: string;
-  lname?: string;
+  fName?: string;
+  lName?: string;
   candidates? : Array<string>;
   positions? : Array<string>;
 }
@@ -135,7 +135,10 @@ export class AuthService {
      const data: User = {
        uid: user.uid,
        email: user.email,
-       username: username
+       username: username,
+       fName: "",
+       lName: ""
+
      }
 
     return userRef.set(data)

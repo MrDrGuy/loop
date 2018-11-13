@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <img height="60%" alt="Loop Logo" src="assets/img/loop1.png">
+  <img height="60%" alt="Loop Logo" src="assets/img/loop1.png">Welcome {{userUsername}}
   <div>
     <button mat-button class="nav-button" [matMenuTriggerFor]="account"><i class="material-icons">person</i></button>
     <mat-menu #account="matMenu">
@@ -21,7 +21,7 @@
 
   <mat-accordion>
     <mat-expansion-panel>
-  
+
       <mat-expansion-panel-header>
         <mat-panel-title>
           James Franklin
@@ -30,7 +30,7 @@
           Stage 1/5
         </mat-panel-description>
       </mat-expansion-panel-header>
-  
+
       <div class="flex-lists">
         <div class="contact">
           <p>
@@ -58,14 +58,14 @@
             </ul>
         </div>
       </div>
-  
-  
+
+
       <mat-action-row>
         <button mat-button (click)="openAcceptDialog()">Advance</button>
         <button mat-button>Email</button>
         <button mat-button (click)="openRejectDialog()">Reject</button>
       </mat-action-row>
-  
+
     </mat-expansion-panel>
   </mat-accordion>
 
