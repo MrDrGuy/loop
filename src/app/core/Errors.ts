@@ -1,9 +1,8 @@
 /*
 *Document Author: Joey Queppet
-*Last Updated: 11/1/2018
-*
-*This service controls routing throughout the application.
- * I've implemented some auth logic into this, auth.guard can probabbly be deleted.
+*Updated: 11/1/2018: Joey
+*Last Updated: 11/1/2018: Joey
+*This class contains the errors that are prompted to the user.
 */
 export class appErrors {
 
@@ -12,6 +11,12 @@ export class appErrors {
   static authError3:string = 'Your passwords do not match.';
   static authError4:string = 'Username is already taken.';
   static authError5:string = 'Username and password combination does not exist.';
+
+  //Main page Errors
+  static MPErr1:string = 'You have no candidates';
+  static MPErr2:string = 'You have no positions';
+  static MPErr3:string = 'There is no user signed in';
+
 
 
 
