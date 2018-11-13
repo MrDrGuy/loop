@@ -31,3 +31,9 @@ export interface Candidate {
   recruiter: string;
   social?: string;
 }
+
+export interface Position {
+  description:string;
+  recruiter:string;
+  candidates: Array<string>;
+}

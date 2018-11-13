@@ -18,7 +18,7 @@ import { AngularFirestoreModule, AngularFirestore,
 import { AngularFireAuth } from '@angular/fire/auth';
 import {appErrors} from '../core/Errors';
 import {appMessages} from '../core/Messages';
-import { Candidate } from '../core/interfaces';
+import { Candidate, Position } from '../core/interfaces';
 
 
 @Component({
@@ -46,7 +46,9 @@ export class MainScreenComponent implements OnInit {
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
   candidateCollection: AngularFirestoreCollection<any> = this.afs.collection('candidates'); // change <any> evenutally
-  candidateCollectionObs = this.userCollection.valueChanges();
+  candidateCollectionObs = this.candidateCollection.valueChanges();
+  positionCollection: AngularFirestoreCollection<any> = this.afs.collection('positions'); // change <any> evenutally
+  positionCollectionObs = this.positionCollection.valueChanges();
 
 
 
@@ -159,7 +161,7 @@ export class MainScreenComponent implements OnInit {
    *
    * It then adds the candidateID to the local list of candidates.
    *  (it also updates candidateCount at this point)
-   *  
+   *
    * It then calls the updateUserCanddiates method to update the new info.
    *
    * It then adds a new candidates document to the 'candidates' collection using
@@ -227,14 +229,104 @@ export class MainScreenComponent implements OnInit {
       });
   }
 
-  //testing button
+  /**
+   * This method updates the user's positions data in the
+   * user's document.
+   * */
+  updateUserPositions(){
+    this.userCollection.doc(this.userID).update({
+      //theContent: this.content,
+      positions: this.userPositions,
+      positionsCount : this.userPositionsCount
+    });
+  }
+
+  /**
+   * This method generates a positionID using the User's email,
+   * and a count variable stored in the user's data.
+   *
+   * It then adds the positionID to the local list of position.
+   *  (it also updates positionCount at this point)
+   *
+   * It then calls the updateUserPosition method to update the new info.
+   *
+   * It then adds a new position document to the 'positions' collection using
+   * the inputed variables.
+   * @param newAddress
+   * @param newEmail
+   * @param newFName
+   * @param newLName
+   * @param newPhone
+   * @param newRecruiter
+   */
+  addPosition(newDescription:string){
+    //name candidate using candidatesCount
+    const positionID = this.userEmail + '_' + this.userPositionsCount;
+    //add candidate to userCandidate
+    this.userPositions.push(positionID);
+    this.userPositionsCount++;
+    //call updateCandidates
+    this.updateUserPositions();
+    //add candidate to candidates collection
+    const emptyStringArray: string[] = [];
+    const userEmail = this.userEmail;
+    const data: Position = {
+      description: newDescription,
+      recruiter: userEmail,
+      candidates: emptyStringArray
+    }
+
+    this.positionCollection.doc(positionID).set(data)
+    .then(()=>{
+      console.log(appMessages.message4);
+    });
+
+  }
+
+  /**
+   * The method deletes the position information from the local positions
+   * variable
+   *
+   * It then calls updateUserPositions which updates the positions variable stored
+   * in the user's document
+   *
+   * IT then deletes the position document in the 'positions' collection
+   * with the ID specified by the param Position ID.
+   * @param positionID
+   */
+  deletePosition(positionID:string){
+    //remove candidate from userCanddiate
+    this.userPositions.forEach( (position, index) => {
+       if(position === positionID) this.userPositions.splice(index,1);
+     });
+    //call updateCandidates
+    this.updateUserPositions();
+    //delete from candidates collection
+    this.positionCollection.doc(positionID)
+      .delete().then(() => {
+        console.log(appMessages.message3);
+      }).catch(error =>{
+        console.log(error);
+      });
+  }
+
+  //---------------------Testing Methods-------------------------
+  //testing method
   addCandidateTest(){
   this.addCandidate('newAddress', 'newEmail', 'newFName',
   'newLName', 'newPhone', 'newRecruiter');
   }
   //testing button
   deleteCandidateTest(){
-  this.deleteCandidate('example3@example.com_1');
+  this.deleteCandidate('');
+  }
+
+  addPositionTest(){
+  this.addPosition('newDescription');
+  }
+  //testing button
+  deletePositionTest(){
+  this.deletePosition('example3@example.com_0');
   }
 
 }

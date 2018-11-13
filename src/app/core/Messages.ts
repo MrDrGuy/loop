@@ -8,6 +8,8 @@ export class appMessages {
   //-------Main Page Messages
   static message1:string = 'This candidate has been deleted.';
   static message2:string = 'This candidate has been created.';
+  static message3:string = 'This position has been deleted.';
+  static message4:string = 'This position has been created.';
 
 
 
