@@ -19,6 +19,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {appErrors} from '../core/Errors';
 import {appMessages} from '../core/Messages';
 import { Candidate, Position } from '../core/interfaces';
+import { ModelPosition } from '../core/classTemplates/Positions';
 
 
 @Component({
@@ -39,9 +40,7 @@ export class MainScreenComponent implements OnInit {
   userUsername: string;
   userFName: string;
   userLName: string;
-  userCandidates: Array<string>;
   userPositions: Array<string>;
-  userCandidatesCount: number;
   userPositionsCount: number;
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
@@ -106,9 +105,7 @@ export class MainScreenComponent implements OnInit {
       this.userEmail = doc.data().email;
       this.userFName = doc.data().fName;
       this.userFName = doc.data().fName;
-      this.userCandidates = doc.data().candidates;
       this.userPositions = doc.data().positions;
-      this.userCandidatesCount = doc.data().candidatesCount;
       this.userPositionsCount = doc.data().positionsCount;
     }else{
       console.log(appErrors.MPErr3);
@@ -118,18 +115,24 @@ export class MainScreenComponent implements OnInit {
   });
   }
 
-  /**
-   * This method checks if candidates has any information.
-   *
-   * */
-  candidatesExist(){
-    if(this.userCandidates.length == 0){
-      console.log(appErrors.MPErr1)
-      return false
+  getPositionData(positionID){
+    this.afs.collection('positions').doc(positionID).ref
+    .get().then(doc=>{
+    if(doc.exists){
+      const theCandidates = doc.data().candidates;
+      const theCandidatesCount = doc.data().candidatesCount;
+      const theDescription = doc.data().description;
+      const theRecruiter = doc.data().description;
+      return new ModelPosition(theDescription,theRecruiter,
+        theCandidates,theCandidatesCount);
     }else{
-      return true;
+      console.log(appErrors.MPErr3);
     }
+  }).catch(err =>{
+    console.log(err);
+  });
   }
+
 
   /**
    * This method checks if positions has any information.
@@ -144,14 +147,15 @@ export class MainScreenComponent implements OnInit {
   }
 
   /**
-   * This method updates the user's candidates data in the
+   * This method updates the position's candidates data in the
    * user's document.
    * */
-  updateUserCandidates(){
-    this.userCollection.doc(this.userID).update({
+  updatePositionCandidates(positionID){
+
+    this.positionCollection.doc(positionID).update({
       //theContent: this.content,
-      candidates: this.userCandidates,
-      candidatesCount : this.userCandidatesCount
+      candidates: this.positionCandidates,
+      candidatesCount : this.positionCandidatesCount
     });
   }
 
@@ -173,15 +177,16 @@ export class MainScreenComponent implements OnInit {
    * @param newPhone
    * @param newRecruiter
    */
-  addCandidate(newAddress: string, newEmail: string, newFName: string,
+  addCandidate(positionID:string, newAddress: string, newEmail: string, newFName: string,
   newLName: string, newPhone: string, newRecruiter: string){
     //name candidate using candidatesCount
-    const candidateID = this.userEmail + '_' + this.userCandidatesCount;
+    const predictionData = this.getPositionData(predictionID);
+    const candidateID = this.userEmail + '_Candidate_' + predictionData.candidatesCount;
     //add candidate to userCandidate
-    this.userCandidates.push(candidateID);
-    this.userCandidatesCount++;
+    predictionData.candidates.push(candidateID);
+    predictionData.candidatesCount++;
     //call updateCandidates
-    this.updateUserCandidates();
+    this.updatePositionCandidates();
     //add candidate to candidates collection
     const emptyStringArray: string[] = [];
     const userEmail = this.userEmail;
@@ -213,7 +218,7 @@ export class MainScreenComponent implements OnInit {
    * with the ID specified by the param Candidate ID.
    * @param candidateID
    */
-  deleteCandidate(candidateID:string){
+  deleteCandidate(positionID:string, candidateID:string){
     //remove candidate from userCanddiate
     this.userCandidates.forEach( (candidate, index) => {
        if(candidate === candidateID) this.userCandidates.splice(index,1);
@@ -273,7 +278,8 @@ export class MainScreenComponent implements OnInit {
     const data: Position = {
       description: newDescription,
       recruiter: userEmail,
-      candidates: emptyStringArray
+      candidates: emptyStringArray,
+      candidateCount: 0
     }
 
     this.positionCollection.doc(positionID).set(data)

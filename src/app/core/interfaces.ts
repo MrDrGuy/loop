@@ -17,7 +17,6 @@ export interface User {
   username?: string;
   fName?: string;
   lName?: string;
-  candidates? : Array<string>;
   positions? : Array<string>;
 }
 
