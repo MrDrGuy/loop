@@ -1,6 +1,7 @@
 /*
 *Document Author: Joey Queppet
-*Last Updated: 11/13/2018 : Joey
+*Updated 11/13/2018 : Joey
+*Last Updated 11/14/2018 : Joey
 *This class controls the main menu functions.
 */
 
@@ -19,7 +20,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {appErrors} from '../core/Errors';
 import {appMessages} from '../core/Messages';
 import { Candidate, Position } from '../core/interfaces';
-
+import { ModelPosition } from '../core/classTemplates/Positions';
+import { ModelCandidate } from '../core/classTemplates/Candidates';
+import { DataService } from '../core/data.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-main-screen',
@@ -39,9 +43,7 @@ export class MainScreenComponent implements OnInit {
   userUsername: string;
   userFName: string;
   userLName: string;
-  userCandidates: Array<string>;
   userPositions: Array<string>;
-  userCandidatesCount: number;
   userPositionsCount: number;
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
@@ -49,6 +51,10 @@ export class MainScreenComponent implements OnInit {
   candidateCollectionObs = this.candidateCollection.valueChanges();
   positionCollection: AngularFirestoreCollection<any> = this.afs.collection('positions'); // change <any> evenutally
   positionCollectionObs = this.positionCollection.valueChanges();
+  positionList: ModelPosition[] = [];
+  currentPosition: ModelPosition;
+  currentPositionID:string;
+  positionCandidateList: ModelCandidate[] = [];
 
 
 
@@ -56,15 +62,23 @@ export class MainScreenComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private afs: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private data: DataService
     ) {
-    this.afAuth.authState.subscribe(user =>{
-        if(user){
-          console.log('Welcome,', user.uid,'!');
-          this.userID = user.uid;
-          this.getUserData(user.uid);
-        }else{
-        }
+    }
+
+    ngOnInit(){
+      this.data.currentPosition.subscribe(message => this.currentPosition);
+      this.data.currentPositionID.subscribe(message => this.currentPositionID);
+      this.data.updateMainMenu.subscribe(message => {
+        this.afAuth.authState.subscribe(user =>{
+            if(user){
+              console.log('Welcome,', user.uid,'!');
+              this.userID = user.uid;
+              this.getUserData(user.uid);
+            }else{
+            }
+          });
       });
     }
 //------------------------Buttons-----------------------------
@@ -87,17 +101,13 @@ export class MainScreenComponent implements OnInit {
   openNewCandidateDialog() {
     this.newCandidateDialogRef = this.dialog.open(NewCandidateDialogComponent);
   }
-
-  ngOnInit() {
-  }
-
 //-----------------------Methods-------------------------------------
 
-/**
- * This method takes the userID, and populates the local variables with
- * the user's data.
- * @param userID is the userID passed to it by the constructor
- */
+  /**
+   * This method takes the userID, and populates the local variables with
+   * the user's data.
+   * @param userID is the userID passed to it by the constructor
+   */
   getUserData(userID){
     this.afs.collection('users').doc(userID).ref
     .get().then(doc=>{
@@ -105,11 +115,10 @@ export class MainScreenComponent implements OnInit {
       this.userUsername = doc.data().username;
       this.userEmail = doc.data().email;
       this.userFName = doc.data().fName;
-      this.userFName = doc.data().fName;
-      this.userCandidates = doc.data().candidates;
+      this.userLName = doc.data().lName;
       this.userPositions = doc.data().positions;
-      this.userCandidatesCount = doc.data().candidatesCount;
       this.userPositionsCount = doc.data().positionsCount;
+      this.getAllPositionData();
     }else{
       console.log(appErrors.MPErr3);
     }
@@ -119,13 +128,94 @@ export class MainScreenComponent implements OnInit {
   }
 
   /**
-   * This method checks if candidates has any information.
    *
+   * This method retrives the data for a given position and stores it as a
+   * positon model object inside the global variable positionList.
+   * @param positionID is the positon ID used to identify the desired positon
+   *                   in the firebase collection.
+   */
+  getPositionData(positionID){
+    this.afs.collection('positions').doc(positionID).ref
+    .get().then(doc=>{
+    if(doc.exists){
+      const theCandidates = doc.data().candidates;
+      const theCandidatesCount = doc.data().candidatesCount;
+      const theDescription = doc.data().description;
+      const theRecruiter = doc.data().description;
+      const theTitle = doc.data().title;
+      this.positionList.push( new ModelPosition(theDescription,theRecruiter,
+        theCandidates,theCandidatesCount, theTitle));
+      console.log('a new position was added to the list.');
+    }else{
+      console.log(appErrors.MPErr3);
+    }
+  }).catch(err =>{
+    console.log(err);
+  });
+  }
+
+
+  /**
+   * A method to retrive all the postion data using the positionID array in the user's variables.
+   * */
+  getAllPositionData(){
+    if(this.positionsExist()){
+      this.userPositions.forEach((aPosition)=>{
+        this.getPositionData(aPosition);
+        console.log(aPosition);
+      })
+    }else{
+      //catch for the front end
+    }
+  }
+
+  /**
+   * This method retrives the candidate information for a given candidateID and
+   * stores it in the global variable positionCandidateList.
+   * @param candidateID
+   */
+  getCandidateData(candidateID){
+    this.afs.collection('candidates').doc(candidateID).ref
+    .get().then(doc=>{
+    if(doc.exists){
+      const theFName = doc.data().fName;
+      const theLName = doc.data().lName;
+      const theEmail = doc.data().email;
+      const thePhoneNumber = doc.data().phoneNumber;
+      const theSocialMedia = doc.data().socialMedia;
+      const theFiles = doc.data().files;
+      this.positionCandidateList.push( new ModelCandidate(theFName, theLName,
+      theEmail, thePhoneNumber, theSocialMedia, theFiles));
+    }else{
+      console.log(appErrors.MPErr3);
+    }
+  }).catch(err =>{
+    console.log(err);
+  });
+  }
+
+
+  /**
+   * A method to retrive all the candidate data.
+   * not yet utilized...
+   * */
+  getAllCandidateData(){
+    if(this.candidatesExist){
+      const candidateList = this.currentPosition.getCandidates()
+      candidateList.forEach((candidate)=>{
+        this.getCandidateData(candidate)
+      })
+    }else{
+      //catch for the front end
+    }
+  }
+
+  /**
+   * Checks to see if the position's candidate array is empty or not.
    * */
   candidatesExist(){
-    if(this.userCandidates.length == 0){
+    if(this.positionCandidateList.length == 0){
       console.log(appErrors.MPErr1)
-      return false
     }else{
       return true;
     }
@@ -135,7 +225,7 @@ export class MainScreenComponent implements OnInit {
    * This method checks if positions has any information.
    *
    * */
-  postionsExist(){
+  positionsExist(){
     if(this.userPositions.length == 0){
       console.log(appErrors.MPErr2)
     }else{
@@ -143,91 +233,7 @@ export class MainScreenComponent implements OnInit {
     }
   }
 
-  /**
-   * This method updates the user's candidates data in the
-   * user's document.
-   * */
-  updateUserCandidates(){
-    this.userCollection.doc(this.userID).update({
-      //theContent: this.content,
-      candidates: this.userCandidates,
-      candidatesCount : this.userCandidatesCount
-    });
-  }
 
-  /**
-   * This method generates a candidateID using the User's email,
-   * and a count variable stored in the user's data.
-   *
-   * It then adds the candidateID to the local list of candidates.
-   *  (it also updates candidateCount at this point)
-   *
-   * It then calls the updateUserCanddiates method to update the new info.
-   *
-   * It then adds a new candidates document to the 'candidates' collection using
-   * the inputed variables.
-   * @param newAddress
-   * @param newEmail
-   * @param newFName
-   * @param newLName
-   * @param newPhone
-   * @param newRecruiter
-   */
-  addCandidate(newAddress: string, newEmail: string, newFName: string,
-  newLName: string, newPhone: string, newRecruiter: string){
-    //name candidate using candidatesCount
-    const candidateID = this.userEmail + '_' + this.userCandidatesCount;
-    //add candidate to userCandidate
-    this.userCandidates.push(candidateID);
-    this.userCandidatesCount++;
-    //call updateCandidates
-    this.updateUserCandidates();
-    //add candidate to candidates collection
-    const emptyStringArray: string[] = [];
-    const userEmail = this.userEmail;
-    const data: Candidate = {
-      address: newAddress,
-      email: newEmail,
-      files: emptyStringArray,
-      fName: newFName,
-      lName: newLName,
-      phone: newPhone,
-      recruiter: userEmail
-    }
-
-    this.candidateCollection.doc(candidateID).set(data)
-    .then(()=>{
-      console.log(appMessages.message1);
-    });
-
-  }
-
-  /**
-   * The method deletes the candidate information from the local candidates
-   * variable
-   *
-   * It then calls updateUserCandidates which updates the candidates variable stored
-   * in the user's document
-   *
-   * IT then deletes the candidate document in the 'candidates' collection
-   * with the ID specified by the param Candidate ID.
-   * @param candidateID
-   */
-  deleteCandidate(candidateID:string){
-    //remove candidate from userCanddiate
-    this.userCandidates.forEach( (candidate, index) => {
-       if(candidate === candidateID) this.userCandidates.splice(index,1);
-     });
-    //call updateCandidates
-    this.updateUserCandidates();
-    //delete from candidates collection
-    this.candidateCollection.doc(candidateID)
-      .delete().then(() => {
-        console.log(appMessages.message1);
-      }).catch(error =>{
-        console.log(error);
-      });
-  }
 
   /**
    * This method updates the user's positions data in the
@@ -241,47 +247,7 @@ export class MainScreenComponent implements OnInit {
     });
   }
 
-  /**
-   * This method generates a positionID using the User's email,
-   * and a count variable stored in the user's data.
-   *
-   * It then adds the positionID to the local list of position.
-   *  (it also updates positionCount at this point)
-   *
-   * It then calls the updateUserPosition method to update the new info.
-   *
-   * It then adds a new position document to the 'positions' collection using
-   * the inputed variables.
-   * @param newAddress
-   * @param newEmail
-   * @param newFName
-   * @param newLName
-   * @param newPhone
-   * @param newRecruiter
-   */
-  addPosition(newDescription:string){
-    //name candidate using candidatesCount
-    const positionID = this.userEmail + '_' + this.userPositionsCount;
-    //add candidate to userCandidate
-    this.userPositions.push(positionID);
-    this.userPositionsCount++;
-    //call updateCandidates
-    this.updateUserPositions();
-    //add candidate to candidates collection
-    const emptyStringArray: string[] = [];
-    const userEmail = this.userEmail;
-    const data: Position = {
-      description: newDescription,
-      recruiter: userEmail,
-      candidates: emptyStringArray
-    }
 
-    this.positionCollection.doc(positionID).set(data)
-    .then(()=>{
-      console.log(appMessages.message4);
-    });
-
-  }
 
   /**
    * The method deletes the position information from the local positions
@@ -310,23 +276,20 @@ export class MainScreenComponent implements OnInit {
       });
   }
 
+
+
   //---------------------Testing Methods-------------------------
   //testing method
-  addCandidateTest(){
-  this.addCandidate('newAddress', 'newEmail', 'newFName',
-  'newLName', 'newPhone', 'newRecruiter');
-  }
-  //testing button
-  deleteCandidateTest(){
-  this.deleteCandidate('');
-  }
 
-  addPositionTest(){
-  this.addPosition('newDescription');
-  }
   //testing button
   deletePositionTest(){
   this.deletePosition('example3@example.com_0');
   }
 
+  testButton(){
+    this.data.changeCurrentPosition(this.positionList[0]);
+    console.log(this.positionList[0]);
+    this.data.changeCurrentPositionID('example7@example.com_0');
+    this.data.changePositionCandidates(this.positionList[0].getCandidates());
+  }
 }

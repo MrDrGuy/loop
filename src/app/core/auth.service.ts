@@ -140,9 +140,7 @@ export class AuthService {
        username: username,
        fName: "",
        lName: "",
-       candidatesCount: 0,
        positionsCount: 0,
-       candidates: emptyStringArray,
        positions: emptyStringArray
 
 
