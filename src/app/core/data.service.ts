@@ -33,7 +33,7 @@ export class DataService {
   //-----------------------Constructor-------------------------------------------
   constructor() { }
 
-  //-----------------------------Methods--------------------------------------------
+  //-----------------------------Methods to update local variables--------------------------------------------
   changeCurrentPosition(position:ModelPosition){
     console.log(this.currentPosition);
     this.currentPositionSource.next(position)
@@ -52,6 +52,11 @@ export class DataService {
     this.positionCandidatesSource.next(positionCandidates)
   }
 
+  /**
+  *This method can be called from other components
+  * to update the Main menu by updating a listener.
+  *Used when new info is loaded into the main menu.
+  */
   updateTheMainMenu(){
     this.updateMainMenuSource.next('update');
   }

@@ -24,7 +24,7 @@ export interface User {
 export interface Candidate {
   address: string;
   email: string;
-  files?: Array<string>;
+  files?: string;
   fName: string;
   lName: string;
   phone: string;
@@ -38,4 +38,17 @@ export interface Position {
   candidates: Array<string>;
   candidatesCount: number;
   title: string;
+}
+
+export interface Files {
+  canidateID: string;
+  recruiterID: string;
+  coverLetterRef: string;
+  coverLetterDL: string;
+  resumeRef: string;
+  resumeDL: string;
+  interviewQsRef: string;
+  interviewQsDL: string;
+  referencesRef: string;
+  referencesDL: string;
 }

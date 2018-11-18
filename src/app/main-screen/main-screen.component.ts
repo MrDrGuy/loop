@@ -81,7 +81,7 @@ export class MainScreenComponent implements OnInit {
           });
       });
     }
-//------------------------Buttons-----------------------------
+//------------------------ngInitButtons-----------------------------
   openAcceptDialog() {
     this.acceptDialogRef = this.dialog.open(AcceptDialogComponent);
   }
