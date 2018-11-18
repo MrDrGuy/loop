@@ -13,7 +13,7 @@ import { AngularFirestoreModule, AngularFirestoreCollection,
    AngularFirestore, AngularFirestoreDocument }
 from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Candidate } from '../core/interfaces';
+import { Candidate, Files } from '../core/interfaces';
 import { ModelPosition } from '../core/classTemplates/Positions';
 import {appMessages} from '../core/Messages';
 import { FormsModule } from '@angular/forms';
@@ -44,6 +44,9 @@ export class NewCandidateDialogComponent {
   positionCollectionObs = this.positionCollection.valueChanges();
   candidateCollection: AngularFirestoreCollection<any> = this.afs.collection('candidates'); // change <any> evenutally
   candidateCollectionObs = this.candidateCollection.valueChanges();
+  filesCollection: AngularFirestoreCollection<any> = this.afs.collection('files'); // change <any> evenutally
+  filesCollectionObs = this.filesCollection.valueChanges();
+
 
 
   constructor(
@@ -64,6 +67,10 @@ export class NewCandidateDialogComponent {
       this.data.currentPositionID.subscribe(message => this.currentPositionID);
    }
 
+/**
+ * This init funciton gets the current data from the DataService.
+ * This is used to pass data around the applicaiton.
+ */
   ngOnInit(){
     this.data.currentPosition.subscribe(message => {
       this.currentPosition = message;
@@ -143,13 +150,14 @@ export class NewCandidateDialogComponent {
     this.positionCandidatesCount = this.positionCandidates.length;
     //call updateCandidates
     this.updatePositionCandidates();
-    //add candidate to candidates collection
-    const emptyStringArray: string[] = [];
+  //add candidate to candidates collection
+    //create a new files document first
+    this.newFiles(candidateID,this.userEmail);
     const userEmail = this.userEmail;
     const data: Candidate = {
       address: this.candidateAddress,
       email: this.candidateEmail,
-      files: emptyStringArray,
+      files: candidateID,
       fName: this.candidateFName,
       lName: this.candidateLName, //need a field here for last name to be pulled in
       phone: this.candidatePhoneNumber,
@@ -163,8 +171,30 @@ export class NewCandidateDialogComponent {
     });
 
   }
+  /**
+  * Adds a new Files document with the candidate's ID
+  * as the files document ID.
+  */
+  newFiles(candidateID:string, recruiterID:string){
+    const data: Files = {
+      canidateID: candidateID,
+      recruiterID: recruiterID,
+      coverLetterRef: '',
+      coverLetterDL: '',
+      resumeRef: '',
+      resumeDL: '',
+      interviewQsRef: '',
+      interviewQsDL: '',
+      referencesRef: '',
+      referencesDL: '',
+    }
 
-
+    this.filesCollection.doc(candidateID).set(data)
+    .then(()=>{
+      console.log(appMessages.message5);
+      this.cancelNewCandidate();
+    });
+  }
 
 
 }
