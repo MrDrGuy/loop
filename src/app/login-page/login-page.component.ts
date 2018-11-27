@@ -108,6 +108,7 @@ export class LoginPageComponent implements OnInit {
       if(doc.exists){
         //console.log(doc.data());
         console.log(this.errors.authError4);
+        this.userError = this.errors.authError4;
       }else{
         this.createAccount(email,regexUsername,password1,password2);
       }

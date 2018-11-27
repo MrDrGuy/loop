@@ -2,47 +2,69 @@
   display: flex;
   flex-direction: column;
   margin: 0 50px;
-  top: 30%; }
+  top: 30%;
+}
 
 mat-card {
-  max-width: 960px !important; }
+  max-width: 960px !important;
+}
+
+.mission-statement {
+  text-align: center;
+  padding-bottom: 50px;
+}
+.mission-statement h2 {
+  font-weight: 700;
+}
+.mission-statement h4 {
+  padding-top: 5px;
+}
 
 .card-padding {
   margin: 0 auto;
   max-width: 960px;
-  width: 100%; }
+  width: 100%;
+}
 
 mat-card-actions {
   display: flex;
   justify-content: flex-end;
   margin-right: 0;
   padding: 0;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+}
 
 .form-div {
   display: flex;
   flex-direction: column;
   width: 50%;
   font-size: 14px;
-  padding-top: 15px; }
+  padding-top: 15px;
+}
 
 img {
   max-width: 944px;
   max-height: 385px;
   margin: auto;
-  padding-top: 35px;
-  width: 100%; }
+  padding-top: 125px;
+  width: 40%;
+}
 
 .img-padding {
   margin: 0 auto;
   max-width: 960px;
-  width: 100%; }
+  width: 100%;
+  text-align: center;
+}
 
 @media only screen and (max-width: 599px) {
   .flex-div {
-    margin: 0 10px; }
+    margin: 0 10px;
+  }
 
   img {
-    width: 100%; } }
+    width: 100%;
+  }
+}
 
 /*# sourceMappingURL=login-page.component.css.map */

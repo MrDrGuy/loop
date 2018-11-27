@@ -11,6 +11,7 @@ export class appErrors {
   static authError2:string = 'This username is taken. Please choose another.';
   static authError3:string = 'Your passwords do not match.';
   static authError4:string = 'Username is already taken.';
+  static authError5:string = 'Username and password combination does not exist.';
 
 
 
