@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule} from './app-routing/app-routing.module';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { FormsModule } from '@angular/forms';
 
 //angularfire and firebase
 import { AngularFireModule } from '@angular/fire';
@@ -54,7 +55,7 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
     MatCardModule,
     MatFormFieldModule,
     AppRoutingModule,
-
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,

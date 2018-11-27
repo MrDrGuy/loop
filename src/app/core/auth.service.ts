@@ -1,7 +1,7 @@
 /*
 *Document Author: Joey Queppet
-*Last Updated: 11/1/2018
-*
+*Updated: 11/1/2018: Joey
+*Last Updated: 11/13/2018 : Joey
 *This service controls the authentication procedures of the application.
 */
 
@@ -25,12 +25,14 @@ import { appErrors } from '../core/Errors';
 
 interface User {
   uid: string;
-  email: string;
+  email?: string;
   username?: string;
-  fname?: string;
-  lname?: string;
+  fName?: string;
+  lName?: string;
   candidates? : Array<string>;
   positions? : Array<string>;
+  candidatesCount?: number;
+  positionsCount?: number;
 }
 
 @Injectable({
@@ -131,11 +133,17 @@ export class AuthService {
    */
  private setUserDoc(user: User, username:string){
      const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
+     const emptyStringArray: string[] = [];
      const data: User = {
        uid: user.uid,
        email: user.email,
-       username: username
+       username: username,
+       fName: "",
+       lName: "",
+       positionsCount: 0,
+       positions: emptyStringArray
+
+
      }
 
     return userRef.set(data)

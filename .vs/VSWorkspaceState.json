@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\core",
+    "\\src\\app\\main-screen",
+    "\\src\\app\\new-candidate-dialog",
+    "\\src\\app\\new-position-dialog"
+  ],
+  "SelectedNode": "\\src\\app\\main-screen\\main-screen.component.ts",
+  "PreviewInSolutionExplorer": false
+}

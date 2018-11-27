@@ -1,45 +1,22 @@
 /*
 *Document Author: Joey Queppet
 *Last Updated: 11/1/2018
-*
+*Scheduled to be deleted by sunday,11/18/2018
 *This service controls setting data to the firestore database.
  * Very rough in production look, may be scrapped later.
 */
 
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { AngularFirestoreModule, AngularFirestoreCollection,
-   AngularFirestore, AngularFirestoreDocument }
-from '@angular/fire/firestore';
-import {Username} from './interfaces';
-import {map} from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
-
-
+import { ModelPosition } from './classTemplates/Positions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  //document Nav
-  filesCollection: AngularFirestoreCollection<any> = this.afs.collection('files');
-  filesObs = this.filesCollection.valueChanges();
+//constructor(private afs: AngularFirestore) { }
 
-  usernamesCollection: AngularFirestoreCollection<Username> = this.afs.collection('usernames');
-  usernames = this.usernamesCollection.valueChanges();
-  username: Observable<Username[]>;
-
-
-
-  constructor(private afs: AngularFirestore) { }
-
-  //Document handeling
-  addDocument(){
-
-  }
-
+  /*
   updateDocument(fileID){
     this.filesCollection.doc(fileID).set({
       canidateID: '',
@@ -61,26 +38,7 @@ export class DatabaseService {
 
   }
 
-  //Recruiter Handeling
-  addRecruiter(){
-
-  }
-  updateRecruiter(){
-
-  }
-  delteRecruiter(){
-
-  }
-  //canidate handeling
-  addCanidate(){
-
-  }
-  updateCanidate(){
-
-  }
-  removeCanidate(){
-
-  }
+  */
 
 //queries
 //https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md

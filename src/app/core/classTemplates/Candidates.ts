@@ -1,7 +1,13 @@
-export class Candidates {
+/*
+*Document Author: Joey Queppet
+*Updated: 11/15/2018 : Joey
+*The Candidate class (model class).
+*/
 
-  private fname : string;
-  private lname : string;
+export class ModelCandidate {
+
+  private fName : string;
+  private lName : string;
   private email : string;
   private phoneNumber : string;
   private socialMedia : string;
@@ -15,8 +21,8 @@ export class Candidates {
     asocialMedia : string,
     afiles : string,
   ){
-    this.fname = afname;
-    this.lname = alname;
+    this.fName = afname;
+    this.lName = alname;
     this.email = aemail;
     this.phoneNumber = aphoneNumber;
     this.socialMedia = asocialMedia;
@@ -25,17 +31,17 @@ export class Candidates {
 
 //first name
   getFName(){
-    return this.fname;
+    return this.fName;
   }
   setFName(value: string){
-    this.fname = value;
+    this.fName = value;
   }
 //last name
   getLName(){
-    return this.lname;
+    return this.lName;
   }
   setLName(value: string){
-    this.lname = value;
+    this.lName = value;
   }
 //email
   getEmail(){
