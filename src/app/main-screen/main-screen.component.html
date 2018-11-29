@@ -8,23 +8,22 @@
     <button mat-button class="nav-button" [matMenuTriggerFor]="menu"><i class="material-icons">menu</i></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="openNewPositionDialog()">Create New...</button>
-      <button mat-menu-item>Position 1</button>
-      <button mat-menu-item>Position 2</button>
-      <button mat-menu-item>Position 3</button>
-      <button mat-menu-item>Position 4</button>
+      <ng-container *ngFor="let position of positionList">
+        <button mat-menu-item>{{position.title}}</button>
+      </ng-container>
     </mat-menu>
   </div>
 </mat-toolbar>
 
 <div class="test">
-  <h1>Job Position</h1>
+  <h1>Job Title</h1>
 
   <mat-accordion>
+    <!-- <ng-container *ngFor="let candidate of candidateCollection"> -->
     <mat-expansion-panel>
-
       <mat-expansion-panel-header>
         <mat-panel-title>
-          James Franklin
+          James Franklin {{candidate.fName}} {{candidate.lName}}
         </mat-panel-title>
         <mat-panel-description>
           Stage 1/5
@@ -48,25 +47,23 @@
             Documents
           </p>
           <ul>
-              <li><i class="material-icons">insert_drive_file</i><span>Resume</span></li>
-              <li><i class="material-icons">email</i><span>Cover Letter</span></li>
-              <li><i class="material-icons">mode_comment</i><span>Interview Notes</span></li>
-              <li><i class="material-icons">group</i><span>References</span></li>
-              <li><i class="material-icons">public</i><span>Website</span></li>
-              <li><button mat-stroked-button color="primary" (click)="openUploadDialog()">+ Upload New</button></li>
+            <li><i class="material-icons">insert_drive_file</i><span>Resume</span></li>
+            <li><i class="material-icons">email</i><span>Cover Letter</span></li>
+            <li><i class="material-icons">mode_comment</i><span>Interview Notes</span></li>
+            <li><i class="material-icons">group</i><span>References</span></li>
+            <li><i class="material-icons">public</i><span>Website</span></li>
+            <li><button mat-stroked-button color="primary" (click)="openUploadDialog()">+ Upload New</button></li>
 
-            </ul>
+          </ul>
         </div>
       </div>
-
-
       <mat-action-row>
         <button mat-button (click)="openAcceptDialog()">Advance</button>
         <button mat-button>Email</button>
         <button mat-button (click)="openRejectDialog()">Reject</button>
       </mat-action-row>
-
     </mat-expansion-panel>
+    <!-- </ng-container> -->
   </mat-accordion>
 
   <button mat-stroked-button color="primary" class="new-candidate" (click)="openNewCandidateDialog()">Add New Candidate</button>
