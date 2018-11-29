@@ -104,6 +104,8 @@ userCollectionObs = this.userCollection.valueChanges();
       //call updateCandidates
       this.updateUserPositions();
       //add candidate to candidates collection
+
+      console.log('1');
       const emptyStringArray: string[] = [];
       const userEmail = this.userEmail;
       const data: Position = {
@@ -113,11 +115,12 @@ userCollectionObs = this.userCollection.valueChanges();
         candidatesCount: 0,
         title: newTitle
       }
-
+      console.log('2');
       this.positionCollection.doc(positionID).set(data)
       .then(()=>{
+        console.log('3');
         console.log(appMessages.message4);
-        this.cancelNewPosition();
+        this.dialogRef.close();
       });
 
     }

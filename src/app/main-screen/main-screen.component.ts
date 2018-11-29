@@ -23,6 +23,7 @@ import { Candidate, Position } from '../core/interfaces';
 import { ModelPosition } from '../core/classTemplates/Positions';
 import { ModelCandidate } from '../core/classTemplates/Candidates';
 import { DataService } from '../core/data.service';
+import { AuthService } from '../core/auth.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -45,16 +46,18 @@ export class MainScreenComponent implements OnInit {
   userLName: string;
   userPositions: Array<string>;
   userPositionsCount: number;
+  positionList: ModelPosition[] = [];
+  currentPosition: ModelPosition;
+  currentPositionID:string;
+  positionCandidateList: ModelCandidate[] = [];
+
+  //firebase references, not things that can be referenced locally.
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
   candidateCollection: AngularFirestoreCollection<any> = this.afs.collection('candidates'); // change <any> evenutally
   candidateCollectionObs = this.candidateCollection.valueChanges();
   positionCollection: AngularFirestoreCollection<any> = this.afs.collection('positions'); // change <any> evenutally
   positionCollectionObs = this.positionCollection.valueChanges();
-  positionList: ModelPosition[] = [];
-  currentPosition: ModelPosition;
-  currentPositionID:string;
-  positionCandidateList: ModelCandidate[] = [];
 
 
 
@@ -63,7 +66,8 @@ export class MainScreenComponent implements OnInit {
     private dialog: MatDialog,
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private data: DataService
+    private data: DataService,
+    private authService : AuthService
     ) {
     }
 
@@ -71,15 +75,22 @@ export class MainScreenComponent implements OnInit {
       this.data.currentPosition.subscribe(message => this.currentPosition);
       this.data.currentPositionID.subscribe(message => this.currentPositionID);
       this.data.updateMainMenu.subscribe(message => {
+        this.positionList = [];
+        this.positionCandidateList = [];
         this.afAuth.authState.subscribe(user =>{
+          console.log('updating Main Menu');
             if(user){
               console.log('Welcome,', user.uid,'!');
               this.userID = user.uid;
+              this.positionList = [];
+              this.positionCandidateList = [];
               this.getUserData(user.uid);
             }else{
+              console.log('User is not logged in.');
             }
           });
       });
+      this.loadfirstPosition();
     }
 //------------------------ngInitButtons-----------------------------
   openAcceptDialog() {
@@ -143,8 +154,9 @@ export class MainScreenComponent implements OnInit {
       const theDescription = doc.data().description;
       const theRecruiter = doc.data().description;
       const theTitle = doc.data().title;
+      const thePositionID = positionID;
       this.positionList.push( new ModelPosition(theDescription,theRecruiter,
-        theCandidates,theCandidatesCount, theTitle));
+        theCandidates,theCandidatesCount, theTitle, thePositionID));
       console.log('a new position was added to the list.');
     }else{
       console.log(appErrors.MPErr3);
@@ -277,6 +289,44 @@ export class MainScreenComponent implements OnInit {
   }
 
 
+  loadfirstPosition(){
+    console.log('loading postion');
+    if(this.positionList.length == 0){
+      //decide some error.
+    }else if(this.positionList.length == 1){
+      this.data.changeCurrentPosition(this.positionList[0]); //sets the current position
+      this.data.changeCurrentPositionID(this.positionList[0].getPositionID()); // sets current postion ID
+      this.data.changePositionCandidates(this.positionList[0].getCandidates()); //sets the current canddiates
+    }else{
+      this.loadNewPosition(this.currentPositionID);
+    }
+  }
+
+  loadNewPosition(newPositionID:string){
+    console.log('pressed', newPositionID);
+    var newPositionIndex;
+    var breakException = {};
+
+    this.positionList.forEach( (position, index) =>{
+      if(position.positionID == newPositionID){
+        newPositionIndex = index;
+      }
+    });
+    this.data.changeCurrentPosition(this.positionList[newPositionIndex]); //sets the current position
+    this.data.changeCurrentPositionID(newPositionID); // sets current postion ID
+    this.data.changePositionCandidates(this.positionList[newPositionIndex].getCandidates()); //sets the current canddiates
+  }
+
+  loadDummyPostion(){
+    //fill in with one blank position, and one blank candidate.
+  }
+
+  /*
+  *triggers the LogOut method in auth
+  */
+  logoutPressed(){
+    this.authService.logOut();
+  }
 
   //---------------------Testing Methods-------------------------
   //testing method

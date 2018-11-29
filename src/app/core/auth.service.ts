@@ -169,6 +169,14 @@ export class AuthService {
     });
    }
 
+   /*
+   *this method logs the user out.
+   */
+   public logOut(){
+      this.afAuth.auth.signOut().then(() => {
+        this.nav.gotoLoginPage();
+      })
+    }
 
 
 

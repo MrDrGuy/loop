@@ -3,13 +3,13 @@
   <div>
     <button mat-button class="nav-button" [matMenuTriggerFor]="account"><i class="material-icons">person</i></button>
     <mat-menu #account="matMenu">
-      <button mat-menu-item>Logout</button>
+      <button mat-menu-item (click)="logoutPressed()">Logout</button>
     </mat-menu>
     <button mat-button class="nav-button" [matMenuTriggerFor]="menu"><i class="material-icons">menu</i></button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="openNewPositionDialog()">Create New...</button>
       <ng-container *ngFor="let position of positionList">
-        <button mat-menu-item>{{position.title}}</button>
+        <button mat-menu-item (click)="loadNewPosition(position.positionID)">{{position.title}}</button>
       </ng-container>
     </mat-menu>
   </div>
@@ -19,7 +19,7 @@
   <h1>Job Title</h1>
 
   <mat-accordion>
-    <!-- <ng-container *ngFor="let candidate of candidateCollection"> -->
+    <ng-container *ngFor="let candidate of positionCandidateList">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -63,7 +63,7 @@
         <button mat-button (click)="openRejectDialog()">Reject</button>
       </mat-action-row>
     </mat-expansion-panel>
-    <!-- </ng-container> -->
+    </ng-container>
   </mat-accordion>
 
   <button mat-stroked-button color="primary" class="new-candidate" (click)="openNewCandidateDialog()">Add New Candidate</button>

@@ -9,19 +9,22 @@ export class ModelPosition{
   candidates: Array<string>;
   candidatesCount: number;
   title: string;
+  positionID: string;
 
   constructor(
     aDescription:string,
     aRecruiter:string,
     aCandidates: Array<string>,
     aCandidatesCount: number,
-    aTitle: string
+    aTitle: string,
+    aPositionID: string
   ){
     this.description = aDescription;
     this.recruiter = aRecruiter;
     this.candidates = aCandidates;
     this.candidatesCount = aCandidatesCount;
-    this.title = aTitle
+    this.title = aTitle;
+    this.positionID = aPositionID;
   }
 
   getDescription(){
@@ -41,7 +44,11 @@ export class ModelPosition{
   }
 
   getTitle(){
+    return this.title;
+  }
 
+  getPositionID(){
+    return this.positionID;
   }
 
 }
