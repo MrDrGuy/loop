@@ -23,6 +23,7 @@ import { Candidate, Position } from '../core/interfaces';
 import { ModelPosition } from '../core/classTemplates/Positions';
 import { ModelCandidate } from '../core/classTemplates/Candidates';
 import { DataService } from '../core/data.service';
+import { AuthService } from '../core/auth.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -45,16 +46,18 @@ export class MainScreenComponent implements OnInit {
   userLName: string;
   userPositions: Array<string>;
   userPositionsCount: number;
+  positionList: ModelPosition[] = [];
+  currentPosition: ModelPosition;
+  currentPositionID:string;
+  positionCandidateList: ModelCandidate[] = [];
+
+  //firebase references, not things that can be referenced locally.
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
   candidateCollection: AngularFirestoreCollection<any> = this.afs.collection('candidates'); // change <any> evenutally
   candidateCollectionObs = this.candidateCollection.valueChanges();
   positionCollection: AngularFirestoreCollection<any> = this.afs.collection('positions'); // change <any> evenutally
   positionCollectionObs = this.positionCollection.valueChanges();
-  positionList: ModelPosition[] = [];
-  currentPosition: ModelPosition;
-  currentPositionID:string;
-  positionCandidateList: ModelCandidate[] = [];
 
 
 
@@ -63,23 +66,35 @@ export class MainScreenComponent implements OnInit {
     private dialog: MatDialog,
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private data: DataService
+    private data: DataService,
+    private authService : AuthService
     ) {
     }
 
     ngOnInit(){
-      this.data.currentPosition.subscribe(message => this.currentPosition);
-      this.data.currentPositionID.subscribe(message => this.currentPositionID);
+      this.data.currentPosition.subscribe(message =>{
+        this.currentPosition = message;
+        this.getAllCandidateData();
+      });
+      this.data.currentPositionID.subscribe(message =>{
+        this.currentPositionID = message;
+      });
       this.data.updateMainMenu.subscribe(message => {
+        this.positionList = [];
+        this.positionCandidateList = [];
         this.afAuth.authState.subscribe(user =>{
+          console.log('updating Main Menu');
+          console.log('current position', this.currentPositionID);
             if(user){
               console.log('Welcome,', user.uid,'!');
               this.userID = user.uid;
               this.getUserData(user.uid);
             }else{
+              console.log('User is not logged in.');
             }
           });
       });
+      //this.loadfirstPosition();
     }
 //------------------------ngInitButtons-----------------------------
   openAcceptDialog() {
@@ -143,8 +158,9 @@ export class MainScreenComponent implements OnInit {
       const theDescription = doc.data().description;
       const theRecruiter = doc.data().description;
       const theTitle = doc.data().title;
+      const thePositionID = positionID;
       this.positionList.push( new ModelPosition(theDescription,theRecruiter,
-        theCandidates,theCandidatesCount, theTitle));
+        theCandidates,theCandidatesCount, theTitle, thePositionID));
       console.log('a new position was added to the list.');
     }else{
       console.log(appErrors.MPErr3);
@@ -186,6 +202,7 @@ export class MainScreenComponent implements OnInit {
       const theFiles = doc.data().files;
       this.positionCandidateList.push( new ModelCandidate(theFName, theLName,
       theEmail, thePhoneNumber, theSocialMedia, theFiles));
+      console.log('added this gent, ',theFName);
     }else{
       console.log(appErrors.MPErr3);
     }
@@ -261,22 +278,99 @@ export class MainScreenComponent implements OnInit {
    * @param positionID
    */
   deletePosition(positionID:string){
-    //remove candidate from userCanddiate
+    var targetIndex;
+    //remove position from userPositions
     this.userPositions.forEach( (position, index) => {
-       if(position === positionID) this.userPositions.splice(index,1);
+       if(position === positionID){
+         this.userPositions.splice(index,1);
+         targetIndex = index;
+       };
      });
-    //call updateCandidates
+    //call updatePositions
     this.updateUserPositions();
-    //delete from candidates collection
+    //get the position candidatesCount
+
+    const targetCandidates = this.positionList[targetIndex];
+    targetCandidates.candidates.forEach( candidate =>{
+      this.deleteCandidate(candidate, true);
+    })
+    //delete from positions collection
     this.positionCollection.doc(positionID)
       .delete().then(() => {
+        this.data.updateTheMainMenu();
         console.log(appMessages.message3);
       }).catch(error =>{
         console.log(error);
       });
   }
 
+  /**
+   * The method has two functions:
+   * -if the boolen is true, it will only delete candidates
+   * -if the boolean is false, that means it is not in mass, and deletes the candidate
+   *     and updates the page.
+   *
+   * @param candidate is the string address to the candidate Document
+   * @param muli indicates if the delete function is working with a single,
+   *              or multiple deletions.
+   */
+  deleteCandidate(candidate:string,multi:boolean){
+    if(!multi){
+      this.candidateCollection.doc(candidate)
+        .delete().catch(err =>{
+          console.log(err);
+        }).then(()=>{
+          this.data.updateTheMainMenu();
+        });
+    }else{
+      this.candidateCollection.doc(candidate)
+        .delete().catch(err =>{
+          console.log(err);
+        });
+    }
+  }
 
+/*
+  loadfirstPosition(){
+    console.log('loading postion');
+    if(this.positionList.length == 0){
+      //decide some error.
+    }else if(this.positionList.length == 1){
+      this.data.changeCurrentPosition(this.positionList[0]); //sets the current position
+      this.data.changeCurrentPositionID(this.positionList[0].getPositionID()); // sets current postion ID
+      this.data.changePositionCandidates(this.positionList[0].getCandidates()); //sets the current canddiates
+    }else{
+      this.loadNewPosition(this.currentPositionID);
+    }
+  }
+*/
+  loadNewPosition(newPositionID:string){
+    console.log('pressed', newPositionID);
+    var newPositionIndex;
+    var breakException = {};
+
+    this.positionList.forEach( (position, index) =>{
+      if(position.positionID == newPositionID){
+        newPositionIndex = index;
+        console.log('index found -- delete me');
+      }
+    });
+    this.data.changeCurrentPosition(this.positionList[newPositionIndex]); //sets the current position
+    this.data.changeCurrentPositionID(newPositionID); // sets current postion ID
+    this.data.changePositionCandidates(this.positionList[newPositionIndex].getCandidates()); //sets the current canddiates
+    this.data.updateTheMainMenu();
+  }
+
+  loadDummyPostion(){
+    //fill in with one blank position, and one blank candidate.
+  }
+
+  /*
+  *triggers the LogOut method in auth
+  */
+  logoutPressed(){
+    this.authService.logOut();
+  }
 
   //---------------------Testing Methods-------------------------
   //testing method
@@ -287,9 +381,15 @@ export class MainScreenComponent implements OnInit {
   }
 
   testButton(){
+    console.log(this.positionCandidateList);
+  }
+
+  /*
+  testButton(){
     this.data.changeCurrentPosition(this.positionList[0]);
     console.log(this.positionList[0]);
     this.data.changeCurrentPositionID('example7@example.com_0');
     this.data.changePositionCandidates(this.positionList[0].getCandidates());
   }
+  */
 }

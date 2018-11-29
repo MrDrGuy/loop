@@ -16,7 +16,7 @@ export class DataService {
 
   //-----------------------------These are the private BehaviorSubject variables,----------------------------
   //-----------------------------and their related observables.----------------------------------------------
-  private currentPositionSource = new BehaviorSubject<ModelPosition>(new ModelPosition('','',['example'],0,''));
+  private currentPositionSource = new BehaviorSubject<ModelPosition>(new ModelPosition('','',['example'],0,'',''));
   currentPosition = this.currentPositionSource.asObservable();
 
   private currentPositionIDSource = new BehaviorSubject<string>('example');
