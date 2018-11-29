@@ -51,7 +51,7 @@ body, .mat-app-background{
 
 .btn-info{
     background-color: unset;
-    border-color: unset;
+    border-color: none;
     font-family: Roboto,"Helvetica Neue",sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -62,11 +62,11 @@ body, .mat-app-background{
 }
 .btn-info:focus{
     background-color: #533A43 !important;
-    border-color: unset !important;
+    border-color: none !important;
 }
 .btn-info:active{
     background-color: #533A43 !important;
-    border-color: unset !important;
+    border-color: none !important;
 }
 
 
