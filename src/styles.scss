@@ -32,6 +32,19 @@ body, .mat-app-background{
     font-weight: 500;
     border-color: #FF8F91;
 }
+.btn-primary:hover{
+    background-color: #533A43 !important;
+    border-color: #FF8F91 !important;
+}
+.btn-primary:focus{
+    background-color: #533A43 !important;
+    border-color: #FF8F91 !important;
+}
+.btn-success:active{
+    background-color: #533A43 !important;
+    border-color: #FF8F91 !important;
+}
+
 
 .btn-info{
     background-color: unset;
@@ -40,6 +53,19 @@ body, .mat-app-background{
     font-size: 14px;
     font-weight: 500;
 }
+.btn-info:hover{
+    background-color: #533A43 !important;
+    border-color: unset !important;
+}
+.btn-info:focus{
+    background-color: #533A43 !important;
+    border-color: unset !important;
+}
+.btn-info:active{
+    background-color: #533A43 !important;
+    border-color: unset !important;
+}
+
 
 .btn-success{
     background-color: #FF8F91;

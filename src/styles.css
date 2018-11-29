@@ -24,12 +24,42 @@ body, .mat-app-background {
   border-color: #FF8F91;
 }
 
+.btn-primary:hover {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important;
+}
+
+.btn-primary:focus {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important;
+}
+
+.btn-success:active {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important;
+}
+
 .btn-info {
   background-color: unset;
   border-color: unset;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 500;
+}
+
+.btn-info:hover {
+  background-color: #533A43 !important;
+  border-color: unset !important;
+}
+
+.btn-info:focus {
+  background-color: #533A43 !important;
+  border-color: unset !important;
+}
+
+.btn-info:active {
+  background-color: #533A43 !important;
+  border-color: unset !important;
 }
 
 .btn-success {
