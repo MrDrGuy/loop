@@ -34,11 +34,6 @@ import { BehaviorSubject } from 'rxjs';
 
 export class MainScreenComponent implements OnInit {
 //--------------local variables and declarations--------
-  acceptDialogRef: MatDialogRef<AcceptDialogComponent>;
-  rejectDialogRef: MatDialogRef<RejectDialogComponent>;
-  uploadDialogRef: MatDialogRef<UploadDialogComponent>;
-  newPositionDialogRef: MatDialogRef<NewPositionDialogComponent>;
-  newCandidateDialogRef: MatDialogRef<NewCandidateDialogComponent>;
   userID: string;
   userEmail: string;
   userUsername: string;
@@ -51,6 +46,13 @@ export class MainScreenComponent implements OnInit {
   currentPositionID:string;
   positionCandidateList: ModelCandidate[] = [];
 
+  // Modal references
+  acceptDialogRef: MatDialogRef<AcceptDialogComponent>;
+  rejectDialogRef: MatDialogRef<RejectDialogComponent>;
+  uploadDialogRef: MatDialogRef<UploadDialogComponent>;
+  newPositionDialogRef: MatDialogRef<NewPositionDialogComponent>;
+  newCandidateDialogRef: MatDialogRef<NewCandidateDialogComponent>;
+
   //firebase references, not things that can be referenced locally.
   userCollection: AngularFirestoreCollection<any> = this.afs.collection('users'); // change <any> evenutally
   userCollectionObs = this.userCollection.valueChanges();
@@ -58,8 +60,6 @@ export class MainScreenComponent implements OnInit {
   candidateCollectionObs = this.candidateCollection.valueChanges();
   positionCollection: AngularFirestoreCollection<any> = this.afs.collection('positions'); // change <any> evenutally
   positionCollectionObs = this.positionCollection.valueChanges();
-
-
 
 //-------------Constructor-----------------------------
   constructor(
