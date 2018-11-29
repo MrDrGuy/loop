@@ -16,6 +16,7 @@ import {appErrors} from '../core/Errors';
 import {appMessages} from '../core/Messages';
 import { Recruiter } from '../core/classTemplates/users';
 import { Candidate, Position } from '../core/interfaces';
+import { DataService } from '../core/data.service';
 
 
 @Component({
@@ -37,7 +38,8 @@ userCollectionObs = this.userCollection.valueChanges();
   constructor(
     private dialogRef: MatDialogRef<NewPositionDialogComponent>,
     private afs: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private data: DataService
     ) {
       this.afAuth.authState.subscribe(user =>{
           if(user){
@@ -105,7 +107,6 @@ userCollectionObs = this.userCollection.valueChanges();
       this.updateUserPositions();
       //add candidate to candidates collection
 
-      console.log('1');
       const emptyStringArray: string[] = [];
       const userEmail = this.userEmail;
       const data: Position = {
@@ -115,12 +116,11 @@ userCollectionObs = this.userCollection.valueChanges();
         candidatesCount: 0,
         title: newTitle
       }
-      console.log('2');
       this.positionCollection.doc(positionID).set(data)
       .then(()=>{
-        console.log('3');
         console.log(appMessages.message4);
         this.dialogRef.close();
+        this.data.updateTheMainMenu();
       });
 
     }
