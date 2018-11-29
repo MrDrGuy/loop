@@ -39,11 +39,14 @@ body, .mat-app-background{
 .btn-primary:focus{
     background-color: #533A43 !important;
     border-color: #FF8F91 !important;
+    color: #ff8f91 !important;
 }
 .btn-success:active{
     background-color: #533A43 !important;
     border-color: #FF8F91 !important;
+    color: #ff8f91 !important;
 }
+
 
 
 .btn-info{
@@ -55,7 +58,7 @@ body, .mat-app-background{
 }
 .btn-info:hover{
     background-color: #533A43 !important;
-    border-color: unset !important;
+    border-color: none !important;
 }
 .btn-info:focus{
     background-color: #533A43 !important;
