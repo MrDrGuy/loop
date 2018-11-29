@@ -73,8 +73,11 @@ export class MainScreenComponent implements OnInit {
 
     ngOnInit(){
       this.data.currentPosition.subscribe(message =>{
-        this.currentPosition = message;
-        this.getAllCandidateData();
+        const title = message.getTitle();
+        if(!(title == 'example')){
+          this.currentPosition = message;
+          this.getAllCandidateData();
+        };
       });
       this.data.currentPositionID.subscribe(message =>{
         this.currentPositionID = message;
@@ -84,7 +87,6 @@ export class MainScreenComponent implements OnInit {
         this.positionCandidateList = [];
         this.afAuth.authState.subscribe(user =>{
           console.log('updating Main Menu');
-          console.log('current position', this.currentPositionID);
             if(user){
               console.log('Welcome,', user.uid,'!');
               this.userID = user.uid;
@@ -202,9 +204,8 @@ export class MainScreenComponent implements OnInit {
       const theFiles = doc.data().files;
       this.positionCandidateList.push( new ModelCandidate(theFName, theLName,
       theEmail, thePhoneNumber, theSocialMedia, theFiles));
-      console.log('added this gent, ',theFName);
     }else{
-      console.log(appErrors.MPErr3);
+      console.log(appErrors.MPErr1);
     }
   }).catch(err =>{
     console.log(err);
@@ -345,14 +346,12 @@ export class MainScreenComponent implements OnInit {
   }
 */
   loadNewPosition(newPositionID:string){
-    console.log('pressed', newPositionID);
     var newPositionIndex;
     var breakException = {};
 
     this.positionList.forEach( (position, index) =>{
       if(position.positionID == newPositionID){
         newPositionIndex = index;
-        console.log('index found -- delete me');
       }
     });
     this.data.changeCurrentPosition(this.positionList[newPositionIndex]); //sets the current position
@@ -371,6 +370,9 @@ export class MainScreenComponent implements OnInit {
   logoutPressed(){
     this.authService.logOut();
   }
+
+
+
 
   //---------------------Testing Methods-------------------------
   //testing method
