@@ -89,7 +89,6 @@ export class NewCandidateDialogComponent {
    * */
   cancelNewCandidate(){
     this.dialogRef.close();
-    this.data.updateTheMainMenu();
   }
 
   /**
@@ -168,6 +167,7 @@ export class NewCandidateDialogComponent {
     .then(()=>{
       console.log(appMessages.message2);
       this.cancelNewCandidate();
+      this.data.updateTheMainMenu();
     });
 
   }
