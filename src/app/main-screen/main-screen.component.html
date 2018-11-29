@@ -16,7 +16,7 @@
 </mat-toolbar>
 
 <div class="test">
-  <h1>Job Title</h1>
+  <h1>{{currentPosition.getTitle()}}</h1>
 
   <mat-accordion>
     <ng-container *ngFor="let candidate of positionCandidateList">
