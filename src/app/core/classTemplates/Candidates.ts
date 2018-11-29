@@ -6,7 +6,7 @@
 
 export class ModelCandidate {
 
-  private fName : string;
+  fName : string;
   private lName : string;
   private email : string;
   private phoneNumber : string;
