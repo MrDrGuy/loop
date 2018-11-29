@@ -15,4 +15,27 @@ body, .mat-app-background {
   padding-left: 0;
 }
 
+.btn-success {
+  background-color: #FF8F91;
+  border-color: #FF8F91;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-success:hover {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important;
+}
+
+.btn-success:focus {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important;
+}
+
+.btn-success:active {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important;
+}
+
 /*# sourceMappingURL=styles.css.map */
