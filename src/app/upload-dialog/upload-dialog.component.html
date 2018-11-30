@@ -1,17 +1,15 @@
 <h1 mat-dialog-title>Upload</h1>
 <div mat-dialog-content>
   <mat-form-field>
-    <mat-select placeholder="Document Type">
+    <mat-select placeholder="Document Type" [(value)]="selected">
       <mat-option *ngFor="let type of types" [value]="type.value">
         {{type.viewValue}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <angular-file-uploader
-      [config]="afuConfig">
-</angular-file-uploader>
+  <input type="file" (change)="uploadFile($event, selected)" #fileUpload>
 </div>
 <div mat-dialog-actions class="mat-dialog-actions">
   <button mat-button (click)="cancelUpload()">Cancel</button>
-  <button mat-button (click)="cancelUpload()">Save Upload</button>
-</div>
+  <button mat-button (click)="saveUpload()">Save Upload</button>
+  </div>

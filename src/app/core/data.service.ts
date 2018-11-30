@@ -30,6 +30,9 @@ export class DataService {
 
   private updateMainMenuSource = new BehaviorSubject<string>('update');
   updateMainMenu = this.updateMainMenuSource.asObservable();
+
+  private targetCandidateIDSource = new BehaviorSubject<string>('example');
+  targetCandidateID = this.targetCandidateIDSource.asObservable();
   //-----------------------Constructor-------------------------------------------
   constructor() { }
 
@@ -59,5 +62,9 @@ export class DataService {
   */
   updateTheMainMenu(){
     this.updateMainMenuSource.next('update');
+  }
+
+  changeTargetCandidateID(candidateID:string){
+    this.targetCandidateIDSource.next(candidateID);
   }
 }
