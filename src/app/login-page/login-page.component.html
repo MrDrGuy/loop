@@ -1,22 +1,12 @@
 <div class="flex-div">
   <div class="img-padding">
     <img src="assets/img/loop1.svg">
-  </div> 
+  </div>
 
   <div class="mission-statement">
     <h2>Your all-in-one recruitment tool</h2>
     <h4>Track your candidates through your own custom process</h4>
   </div>
-
-  <!--
-<div class="loading-outer">
-    <div class="loader"></div>
-
-  </div>
-
-  -->
-  
-
 
   <div class="card-padding">
     <mat-card>
@@ -53,21 +43,13 @@
           </div>
           <mat-card-actions>
             <button mat-button (click)="verifyUsername(cEmail.value,cUsername.value,
-            cPassword.value, cPassword2.value)">Create Account</button>
+            cPassword.value, cPassword2.value)">Create
+              Account</button>
           </mat-card-actions>
         </mat-tab>
 
       </mat-tab-group>
     </mat-card>
   </div>
-
+  <div>{{userError}}</div>
 </div>
-
-<div>{{userError}}</div>
-
-
-<!--<div>Welcome, this works! {{good}}</div>
-<button mat-button (click)="testerButton()">Create Account</button>
-<button mat-button (click)="testerButton2()">Log In</button>
-<div>{{good}}</div>
-<div>{{sood}}</div>-->
