@@ -7,18 +7,20 @@
 export class ModelCandidate {
 
   fName : string;
-  private lName : string;
-  private email : string;
-  private phoneNumber : string;
-  private socialMedia : string;
-  private files : string;
-  private candidateID: string;
+  lName : string;
+  email : string;
+  recruiter: string;
+  phone : string;
+  socialMedia : string;
+  files : string;
+  candidateID: string;
 
   constructor(
     afname : string,
     alname : string,
     aemail : string,
-    aphoneNumber : string,
+    arecruiter: string,
+    aphone : string,
     asocialMedia : string,
     afiles : string,
     aCandidateID:string
@@ -26,7 +28,8 @@ export class ModelCandidate {
     this.fName = afname;
     this.lName = alname;
     this.email = aemail;
-    this.phoneNumber = aphoneNumber;
+    this.recruiter = arecruiter;
+    this.phone = aphone;
     this.socialMedia = asocialMedia;
     this.files = afiles;
     this.candidateID = aCandidateID;
@@ -54,11 +57,11 @@ export class ModelCandidate {
     this.email = value;
   }
 //phone number
-  getPhoneNumber(){
-    return this.phoneNumber;
+  getPhone(){
+    return this.phone;
   }
   setPhoneNumber(value: string){
-    this.phoneNumber = value;
+    this.phone = value;
   }
 //social media
   getSocialMedia(){
