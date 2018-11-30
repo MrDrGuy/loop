@@ -107,7 +107,8 @@ export class MainScreenComponent implements OnInit {
     this.rejectDialogRef = this.dialog.open(RejectDialogComponent);
   }
 
-  openUploadDialog() {
+  openUploadDialog(candidateID:string) {
+    this.data.changeTargetCandidateID(candidateID);
     this.uploadDialogRef = this.dialog.open(UploadDialogComponent);
   }
 
@@ -202,8 +203,9 @@ export class MainScreenComponent implements OnInit {
       const thePhoneNumber = doc.data().phoneNumber;
       const theSocialMedia = doc.data().socialMedia;
       const theFiles = doc.data().files;
+      const theCandidateID = candidateID
       this.positionCandidateList.push( new ModelCandidate(theFName, theLName,
-      theEmail, thePhoneNumber, theSocialMedia, theFiles));
+      theEmail, thePhoneNumber, theSocialMedia, theFiles, theCandidateID));
     }else{
       console.log(appErrors.MPErr1);
     }

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { DataService } from '../core/data.service';
+import * as firebase from 'firebase/app'; // needed to import firestore below
+import { AngularFirestoreModule, AngularFirestore,
+   AngularFirestoreCollection, AngularFirestoreDocument }
+    from '@angular/fire/firestore';
+import { AngularFireStorage} from '@angular/fire/storage';
 
 export interface Types {
   value: string;
@@ -11,9 +17,42 @@ export interface Types {
   templateUrl: './upload-dialog.component.html',
   styleUrls: ['./upload-dialog.component.css']
 })
+
 export class UploadDialogComponent {
-  constructor(private dialogRef: MatDialogRef<UploadDialogComponent>) { }
-  
+  candidateID:string
+  private file:File
+
+
+  constructor(
+    private dialogRef: MatDialogRef<UploadDialogComponent>,
+    private data: DataService,
+    private afs: AngularFirestore,
+    private afStorage: AngularFireStorage
+
+  ) { }
+
+  ngOnInit(){
+    this.data.targetCandidateID.subscribe(message => {
+      this.candidateID = message;
+    });
+  }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = this.candidateID;
+    const ref = this.afStorage.ref(filePath);
+    const task = ref.put(file);
+
+    //const task = ref.put(file);
+    //this.afStorage.upload('/upload/to/this-path', event.target.files[0]);
+  }
+
+  saveUpload(file:File, type:string){
+    var storageRef = firebase.storage().ref();
+    this.dialogRef.close();
+  }
+
+
   cancelUpload(){
     this.dialogRef.close();
   }
@@ -27,6 +66,7 @@ export class UploadDialogComponent {
   ];
 
   afuConfig = {
+    maxSize: "1",
     uploadAPI: {
       url:"https://example-file-upload-api"
     }

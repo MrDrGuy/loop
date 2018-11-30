@@ -43,6 +43,7 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
     UploadDialogComponent,
     NewPositionDialogComponent,
     NewCandidateDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -59,6 +60,7 @@ import { NewCandidateDialogComponent } from './new-candidate-dialog/new-candidat
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
+    AngularFireStorageModule,
     MatTabsModule,
     MatInputModule,
     MatSelectModule,

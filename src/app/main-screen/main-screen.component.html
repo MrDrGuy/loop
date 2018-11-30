@@ -23,7 +23,7 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          James Franklin {{candidate.fName}} {{candidate.lName}}
+          {{candidate.fName}} {{candidate.lName}}
         </mat-panel-title>
         <mat-panel-description>
           Stage 1/5
@@ -52,7 +52,7 @@
             <li><i class="material-icons">mode_comment</i><span>Interview Notes</span></li>
             <li><i class="material-icons">group</i><span>References</span></li>
             <li><i class="material-icons">public</i><span>Website</span></li>
-            <li><button mat-stroked-button color="primary" (click)="openUploadDialog()">+ Upload New</button></li>
+            <li><button mat-stroked-button color="primary" (click)="openUploadDialog(candidate.candidateID)">+ Upload New</button></li>
 
           </ul>
         </div>

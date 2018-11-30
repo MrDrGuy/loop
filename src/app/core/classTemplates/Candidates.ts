@@ -12,6 +12,7 @@ export class ModelCandidate {
   private phoneNumber : string;
   private socialMedia : string;
   private files : string;
+  private candidateID: string;
 
   constructor(
     afname : string,
@@ -20,6 +21,7 @@ export class ModelCandidate {
     aphoneNumber : string,
     asocialMedia : string,
     afiles : string,
+    aCandidateID:string
   ){
     this.fName = afname;
     this.lName = alname;
@@ -27,6 +29,7 @@ export class ModelCandidate {
     this.phoneNumber = aphoneNumber;
     this.socialMedia = asocialMedia;
     this.files = afiles;
+    this.candidateID = aCandidateID;
   }
 
 //first name
