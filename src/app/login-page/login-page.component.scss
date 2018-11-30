@@ -1,32 +1,51 @@
-.flex-div {
-    display: flex;
-    flex-direction: column;
-    margin: 0 50px;
-    top: 30%;
-}
-
-.loading-outer{
-    padding-bottom: 20px;
-}
-
-.loader {
-    border: 16px solid #424242; /* Light grey */
-    border-top: 16px solid #FF8F91; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+img {
+    padding-top: 125px;
+    width: 40%;
 }
 
 mat-card {
     max-width: 960px !important;
 }
 
+mat-card-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+}
+
+// Positioning/layout for the Login/Create Account card
+.card-padding {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+}
+
+// Sets up flex layout for the page
+.flex-div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 50px;
+}
+
+// Styles all input fields
+.form-div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    font-size: 14px;
+    padding-top: 15px;
+}
+
+// Positioning/Layout for the logo
+.img-padding {
+    margin: 0 auto;
+    max-width: 960px;
+    width: 100%;
+    text-align: center;
+}
+
+// Styles text under the logo
 .mission-statement{
     text-align: center;
     padding-bottom: 50px;
@@ -38,45 +57,7 @@ mat-card {
     }
 }
 
-
-.card-padding {
-    margin: 0 auto;
-    max-width: 960px;
-    width: 100%;
-    padding-bottom:10px;
-}
-
-mat-card-actions{
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 0;
-    padding: 0;
-    margin-bottom: 0;
-}
-
-.form-div {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    font-size: 14px;
-    padding-top: 15px;
-}
-
-img {
-    max-width: 944px;
-    max-height: 385px;
-    margin: auto;
-    padding-top: 125px;
-    width: 40%;
-}
-
-.img-padding {
-    margin: 0 auto;
-    max-width: 960px;
-    width: 100%;
-    text-align: center;
-}
-
+// Mobile-specific styling
 @media only screen and (max-width: 599px){
     .flex-div {
         margin: 0 10px;
