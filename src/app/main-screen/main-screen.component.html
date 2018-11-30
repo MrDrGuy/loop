@@ -1,5 +1,6 @@
 <mat-toolbar>
-  <img height="60%" alt="Loop Logo" src="assets/img/loop1.png">Welcome {{userUsername}}
+      <img height="60%" alt="Loop Logo" src="assets/img/loop1.png">
+      <span class="welcome">Welcome, {{userUsername}}!</span>
   <div>
     <button mat-button class="nav-button" [matMenuTriggerFor]="account"><i class="material-icons">person</i></button>
     <mat-menu #account="matMenu">
@@ -7,7 +8,7 @@
     </mat-menu>
     <button mat-button class="nav-button" [matMenuTriggerFor]="menu"><i class="material-icons">menu</i></button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openNewPositionDialog()">Create New...</button>
+      <button mat-menu-item (click)="openNewPositionDialog()">Create New Position...</button>
       <ng-container *ngFor="let position of positionList">
         <button mat-menu-item (click)="loadNewPosition(position.positionID)">{{position.title}}</button>
       </ng-container>
@@ -15,13 +16,13 @@
   </div>
 </mat-toolbar>
 
-<div class="test">
+<div class="container-div">
   <h1>{{currentPosition.getTitle()}}</h1>
 
   <mat-accordion>
     <ng-container *ngFor="let candidate of positionCandidateList">
     <mat-expansion-panel>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header class="header-align">
         <mat-panel-title>
           <ng-container>
             {{candidate.fName}} {{candidate.lName}}
@@ -63,7 +64,7 @@
       </div>
       <mat-action-row>
         <button mat-button (click)="openAcceptDialog()">Advance</button>
-        <button mat-button>Email</button>
+        <a href="mailto:{{candidate.email}}" class="mailto-btn"><button mat-button>Email</button></a>
         <button mat-button (click)="openRejectDialog()">Reject</button>
       </mat-action-row>
     </mat-expansion-panel>

@@ -71,4 +71,10 @@ body, .mat-app-background {
   background-color: #FFC7C8 !important;
   border-color: #FFC7C8 !important; }
 
+.header-align > .mat-content {
+  justify-content: space-between; }
+
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto; }
+
 /*# sourceMappingURL=styles.css.map */
