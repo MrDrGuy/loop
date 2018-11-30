@@ -15,6 +15,7 @@ from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Candidate, Files } from '../core/interfaces';
 import { ModelPosition } from '../core/classTemplates/Positions';
+import { ModelCandidate } from '../core/classTemplates/Candidates';
 import {appMessages} from '../core/Messages';
 import { FormsModule } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -160,15 +161,26 @@ export class NewCandidateDialogComponent {
       fName: this.candidateFName,
       lName: this.candidateLName, //need a field here for last name to be pulled in
       phone: this.candidatePhoneNumber,
-      recruiter: this.userEmail
+      recruiter: this.userEmail,
+      social: 'Fix me!!!!!'
     }
 
     this.candidateCollection.doc(candidateID).set(data)
     .then(()=>{
       console.log(appMessages.message2);
       this.cancelNewCandidate();
-      this.data.updateTheMainMenu();
+      this.data.addNewCandidate(new ModelCandidate(
+        this.candidateFName,
+        this.candidateLName,
+        this.candidateEmail,
+        this.userEmail,
+        this.candidatePhoneNumber,
+        'FixMEEEEE',
+        candidateID,
+        candidateID
+      ));
     });
+
 
   }
   /**

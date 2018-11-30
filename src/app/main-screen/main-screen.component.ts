@@ -45,6 +45,8 @@ export class MainScreenComponent implements OnInit {
   currentPosition: ModelPosition;
   currentPositionID:string;
   positionCandidateList: ModelCandidate[] = [];
+  canAddNewCandidate:boolean = false;
+
 
   // Modal references
   acceptDialogRef: MatDialogRef<AcceptDialogComponent>;
@@ -95,6 +97,12 @@ export class MainScreenComponent implements OnInit {
               console.log('User is not logged in.');
             }
           });
+      });
+      this.data.newCandidate.subscribe(message =>{
+        if(this.canAddNewCandidate){
+          this.addNewCandidate(message);
+        }
+        this.canAddNewCandidate = true;
       });
       //this.loadfirstPosition();
     }
@@ -200,12 +208,13 @@ export class MainScreenComponent implements OnInit {
       const theFName = doc.data().fName;
       const theLName = doc.data().lName;
       const theEmail = doc.data().email;
+      const theRecruiter = doc.data().recruiter;
       const thePhoneNumber = doc.data().phoneNumber;
       const theSocialMedia = doc.data().socialMedia;
       const theFiles = doc.data().files;
       const theCandidateID = candidateID
       this.positionCandidateList.push( new ModelCandidate(theFName, theLName,
-      theEmail, thePhoneNumber, theSocialMedia, theFiles, theCandidateID));
+      theEmail,theRecruiter, thePhoneNumber, theSocialMedia, theFiles, theCandidateID));
     }else{
       console.log(appErrors.MPErr1);
     }
@@ -213,6 +222,7 @@ export class MainScreenComponent implements OnInit {
     console.log(err);
   });
   }
+
 
 
   /**
@@ -239,6 +249,13 @@ export class MainScreenComponent implements OnInit {
     }else{
       return true;
     }
+  }
+
+  /**
+   * adds a new candidate to the position's candidate list
+   * */
+  addNewCandidate(candidate:ModelCandidate){
+    this.positionCandidateList.push(candidate);
   }
 
   /**

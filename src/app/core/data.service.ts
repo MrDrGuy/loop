@@ -1,13 +1,14 @@
 /*
 *Document Author: Joey Queppet
 *Created: 11/15/2018 : Joey
-*This service controls data transfer between components.
+*This service controls data transfer, and update alerts between components.
 */
 
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ModelPosition } from './classTemplates/Positions';
+import { ModelCandidate } from './classTemplates/Candidates';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,9 @@ export class DataService {
 
   private targetCandidateIDSource = new BehaviorSubject<string>('example');
   targetCandidateID = this.targetCandidateIDSource.asObservable();
+
+  private newCandidateSource = new BehaviorSubject<ModelCandidate>(new ModelCandidate('','','','','','','',''));
+  newCandidate = this.newCandidateSource.asObservable();
   //-----------------------Constructor-------------------------------------------
   constructor() { }
 
@@ -66,5 +70,9 @@ export class DataService {
 
   changeTargetCandidateID(candidateID:string){
     this.targetCandidateIDSource.next(candidateID);
+  }
+
+  addNewCandidate(candidate:ModelCandidate){
+    this.newCandidateSource.next(candidate);
   }
 }
