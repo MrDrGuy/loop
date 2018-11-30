@@ -7,15 +7,6 @@ a{
     color: #FF8F91;
 }
 
-// .mat-app-background {
-//     background-image: url('assets/img/login-min.jpg') !important;
-//     background-size: cover;
-//     @media only screen and (max-device-width: 952px) {
-//         background-size: auto;
-//         background-position: center center;
-//     }
-// }
-
 body, .mat-app-background{
     margin: 0;
 }
@@ -23,6 +14,7 @@ body, .mat-app-background{
 .container {
     padding-left: 0;
 }
+
 
 .btn-primary{
     background-color: unset;
@@ -46,7 +38,6 @@ body, .mat-app-background{
     border-color: #FF8F91 !important;
     color: #ff8f91 !important;
 }
-
 
 
 .btn-info{
@@ -77,18 +68,23 @@ body, .mat-app-background{
     font-size: 14px;
     font-weight: 500;
 }
-
 .btn-success:hover{
     background-color: #FFC7C8 !important;
     border-color: #FFC7C8 !important; 
 }
-
 .btn-success:focus{
     background-color: #FFC7C8 !important;
     border-color: #FFC7C8 !important;
 }
-
 .btn-success:active{
     background-color: #FFC7C8 !important;
     border-color: #FFC7C8 !important;
+}
+
+// Formatting for expansion panel headers
+.header-align > .mat-content {
+    justify-content: space-between;
+}
+.mat-content > mat-panel-title, .mat-content > mat-panel-description {
+  flex: 0 0 auto;
 }
