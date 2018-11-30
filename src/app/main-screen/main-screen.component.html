@@ -19,11 +19,13 @@
   <h1>{{currentPosition.getTitle()}}</h1>
 
   <mat-accordion>
-    <ng-container *ngFor="let candidate of positionCandidateList">
+    <ng-container *ngFor="let listItem of positionCandidateList">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{candidate.fName}} {{candidate.lName}}
+          <ng-container *ngFor="let candidate of positionCandidateList">
+            {{candidate.fName}} {{candidate.lName}}
+          </ng-container>
         </mat-panel-title>
         <mat-panel-description>
           Stage 1/5
@@ -36,10 +38,12 @@
             Contact Info
           </p>
           <ul>
-            <li><i class="material-icons">home</i><span>Address</span></li>
-            <li><i class="material-icons">phone</i><span>Phone number</span></li>
-            <li><i class="material-icons">alternate_email</i><span>Email address</span></li>
-            <li><i class="material-icons">share</i><span>Social Media</span></li>
+            <ng-container *ngFor="let candidate of positionCandidateList">
+              <!-- <li><i class="material-icons">home</i><span>{{candidate.address}}</span></li> -->
+              <li><i class="material-icons">phone</i><span>{{candidate.phone}}</span></li>
+              <li><i class="material-icons">alternate_email</i><span>{{candidate.email}}</span></li>
+              <!-- <li><i class="material-icons">share</i><span>Social Media</span></li> -->
+            </ng-container>
           </ul>
         </div>
         <div class="docs">

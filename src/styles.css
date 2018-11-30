@@ -1,18 +1,74 @@
 @import url(pink-bluegrey.css);
 body {
-  font-family: "Open Sans", sans-serif;
-}
+  font-family: 'Open Sans', sans-serif; }
 
 a {
-  color: #FF8F91;
-}
+  color: #FF8F91; }
 
 body, .mat-app-background {
-  margin: 0;
-}
+  margin: 0; }
 
 .container {
-  padding-left: 0;
-}
+  padding-left: 0; }
+
+.btn-primary {
+  background-color: unset;
+  color: #ff8f91;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-color: #FF8F91; }
+
+.btn-primary:hover {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important; }
+
+.btn-primary:focus {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important;
+  color: #ff8f91 !important; }
+
+.btn-success:active {
+  background-color: #533A43 !important;
+  border-color: #FF8F91 !important;
+  color: #ff8f91 !important; }
+
+.btn-info {
+  background-color: unset;
+  border: none !important;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500; }
+
+.btn-info:hover {
+  background-color: #533A43 !important;
+  border-color: none !important; }
+
+.btn-info:focus {
+  background-color: #533A43 !important;
+  border-color: unset !important; }
+
+.btn-info:active {
+  background-color: #533A43 !important;
+  border-color: unset !important; }
+
+.btn-success {
+  background-color: #FF8F91;
+  border-color: #FF8F91;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500; }
+
+.btn-success:hover {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important; }
+
+.btn-success:focus {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important; }
+
+.btn-success:active {
+  background-color: #FFC7C8 !important;
+  border-color: #FFC7C8 !important; }
 
 /*# sourceMappingURL=styles.css.map */
