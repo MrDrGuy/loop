@@ -5,7 +5,7 @@ import * as firebase from 'firebase/app'; // needed to import firestore below
 import { AngularFirestoreModule, AngularFirestore,
    AngularFirestoreCollection, AngularFirestoreDocument }
     from '@angular/fire/firestore';
-import { AngularFireStorage} from '@angular/fire/storage';
+import { AngularFireStorage , AngularFireStorageReference } from '@angular/fire/storage';
 
 export interface Types {
   value: string;
@@ -21,6 +21,9 @@ export interface Types {
 export class UploadDialogComponent {
   candidateID:string
   private file:File
+  private fileRef:AngularFireStorageReference
+  private allowUpload:boolean = false;
+  private type:string
 
 
   constructor(
@@ -37,19 +40,26 @@ export class UploadDialogComponent {
     });
   }
 
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = this.candidateID;
-    const ref = this.afStorage.ref(filePath);
-    const task = ref.put(file);
+  uploadFile(event, type:string) {
+    if(!(type == null)){
+      this.type = type;
+      this.file = event.target.files[0];
+      const filePath = `/${this.candidateID}/` + type;
+      this.fileRef = this.afStorage.ref(filePath);
+      this.allowUpload = true;
+    }else{
+      this.allowUpload = false;
+    }
 
     //const task = ref.put(file);
     //this.afStorage.upload('/upload/to/this-path', event.target.files[0]);
   }
 
   saveUpload(file:File, type:string){
-    var storageRef = firebase.storage().ref();
-    this.dialogRef.close();
+    if(this.allowUpload){
+      const task = this.fileRef.put(this.file).then();
+      this.dialogRef.close();
+    }
   }
 
 
